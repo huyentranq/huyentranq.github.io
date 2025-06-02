@@ -14,63 +14,122 @@
   </style>
 </head>
 <body>
-  <h1>TMDB-Pipeline-Recommendation</h1>
-  <p>Dự án ELT Pipeline thuộc lĩnh vực Data Engineering nhằm hỗ trợ hệ thống gợi ý phim và dashboard phân tích.</p>
-  
-  <h2>🎯 Mục tiêu dự án</h2>
+  <h1>ELT Pipeline for TMDB-Pipeline-Recommendation</h1>
+  <p>TMDB-Pipeline-Recommendation là một dự án thuộc lĩnh vực Data Engineering, nhằm xây dựng một hệ thống ELT pipeline xử lý dữ liệu hỗ trợ cho:</p>
   <ul>
-    <li>Xây dựng hệ thống pipeline hoàn chỉnh từ thu thập đến trực quan hóa dữ liệu</li>
-    <li>Gợi ý phim theo lịch sử đánh giá cá nhân</li>
-    <li>Phân tích và báo cáo dữ liệu phim qua dashboard</li>
+    <li>Hệ thống gợi ý phim dựa trên lịch sử đánh giá phim của cá nhân (Recommendation System)</li>
+    <li>Dashboard phân tích và báo cáo thông tin phim</li>
+  </ul>
+  <p>Dự án tập trung vào việc xây dựng một pipeline ELT hoàn chỉnh, bắt đầu từ việc thu thập dữ liệu từ nhiều nguồn như Kaggle, TMDB API, Transform bằng Apache Spark theo kiến trúc Lakehouse, lưu trữ tại PostgreSQL, rồi xây dựng các mô hình dữ liệu với DBT, và cuối cùng là trình bày dữ liệu qua giao diện trực quan bằng Streamlit. Dagster được lựa chọn làm Data Orchestrator.</p>
+
+  <h2>🚀 Các công nghệ, ngôn ngữ chính được sử dụng</h2>
+  <h3>⚙️ Orchestration & Data Processing</h3>
+  <p><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="60" title="Python" />
+     <img src="images/spark.png" width="100" title="Apache Spark" />
+     <img src="images/dagster.png" width="80" title="Dagster" />
+     <img src="images/dbt.png" width="100" title="dbt" /></p>
+
+  <h3>☁️ Lưu trữ & Truy xuất dữ liệu</h3>
+  <p><img src="https://min.io/resources/img/logo/MINIO_Bird.png" width="40" title="MinIO" />
+     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="40" title="MySQL" />
+     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="40" title="PostgreSQL" />
+     <img src="images/polar.png" width="80" title="Polars" /></p>
+
+  <h3>📊 Visualization</h3>
+  <p><img src="https://streamlit.io/images/brand/streamlit-logo-primary-colormark-darktext.svg" width="140" title="Streamlit" /></p>
+
+  <h2>Giao diện Streamlit</h2>
+  <img src="images/output.jpg" alt="Giao diện streamlit" />
+
+  <h2>Project Overview</h2>
+  <h3>1. Data pipeline design</h3>
+  <img src="images/pipeline.png" alt="Pipeline Diagram" />
+
+  <h4>1. Data Sources – Thu thập dữ liệu</h4>
+  <ul>
+    <li><strong>TMDB API</strong>: Trích xuất thông tin phim từ API chính thức.</li>
+    <li><strong>Kaggle</strong>: Dataset (~1M) thông tin phim.</li>
+    <li><strong>MySQL</strong>: Lưu dữ liệu thô.</li>
   </ul>
 
-  <h2>🚀 Công nghệ sử dụng</h2>
-  <h3>Orchestration & Data Processing</h3>
-  <p>Python, Apache Spark, Dagster, DBT</p>
-  
-  <h3>Lưu trữ & Truy xuất</h3>
-  <p>MinIO, MySQL, PostgreSQL, Polars</p>
-
-  <h3>Visualization</h3>
-  <p>Streamlit</p>
-
-  <h2>🔧 Kiến trúc Pipeline</h2>
-  <img src="images/pipeline.png" alt="Pipeline Diagram">
+  <h4>2. Lakehouse – Xử lý và tổ chức dữ liệu</h4>
   <ul>
-    <li>Data Sources: TMDB API, Kaggle Dataset (1M movies)</li>
-    <li>Bronze: dữ liệu thô lưu tại MySQL</li>
-    <li>Silver: xử lý và làm sạch với Spark/Polars</li>
-    <li>Gold: enrich và tổ chức dữ liệu</li>
-    <li>Warehouse: PostgreSQL và DBT</li>
-    <li>UI: Streamlit Recommendation + Dashboard</li>
+    <li><strong>Apache Spark</strong>: xử lý theo tầng Bronze → Silver → Gold.</li>
+    <li><strong>Polars</strong>: hỗ trợ tiền xử lý hiệu năng cao.</li>
+    <li><strong>Spark MLlib</strong>: áp dụng ML đơn giản hoặc gợi ý.</li>
   </ul>
 
-  <h2>🧬 Data Lineage</h2>
-  <p>Quản lý job và assets bằng Dagster</p>
-  <img src="images/lineage.jpg" alt="Data Lineage">
-  <img src="images/bronze_layer.jpg" alt="Bronze Layer">
-  <img src="images/silver.jpg" alt="Silver Layer">
-  <img src="images/gold.jpg" alt="Gold Layer">
-  <img src="images/warehouse.jpg" alt="Warehouse Layer">
+  <h4>3. Warehouse – Lưu trữ dữ liệu</h4>
+  <p>Sau xử lý, dữ liệu đưa vào PostgreSQL. DBT dùng để xây dựng các bảng trung gian.</p>
 
-  <h2>⚙️ Các bước triển khai</h2>
-  <ol>
-    <li>Clone repo & tải dataset từ Kaggle</li>
-    <li>Điền file ENV với API Token từ TMDB</li>
-    <li>Thiết lập môi trường ảo Python</li>
-    <li>Build container bằng Makefile</li>
-    <li>Load dữ liệu vào MySQL và PostgreSQL</li>
-    <li>Chạy các assets qua Dagster</li>
-    <li>Build models bằng DBT</li>
-    <li>Khám phá ứng dụng tại Streamlit</li>
-  </ol>
+  <h4>4. Streamlit – Giao diện người dùng</h4>
+  <ul>
+    <li>Recommendations</li>
+    <li>Visualizations</li>
+    <li>Search Information</li>
+  </ul>
 
-  <h2>📸 Giao diện Streamlit</h2>
-  <img src="images/output.jpg" alt="Streamlit UI">
+  <h3>2. Data lineage</h3>
+  <p>Sử dụng Dagster để orchestration.</p>
+  <img src="images/lineage.jpg" alt="Data lineage" />
+  <img src="images/bronze_layer.jpg" alt="Bronze Layer" />
+  <img src="images/silver.jpg" alt="Silver Layer" />
+  <img src="images/gold.jpg" alt="Gold Layer" />
+  <img src="images/warehouse.jpg" alt="Warehouse Layer" />
 
-  <h2>🎯 Kết luận</h2>
-  <p>Dự án giúp mình tiếp cận với toàn bộ quy trình ELT hiện đại, từ ingest, transform đến build data warehouse và UI. Đây là nền tảng vững chắc để phát triển các hệ thống dữ liệu phức tạp trong tương lai.</p>
+  <h3>3. Các bước cài đặt & triển khai</h3>
+  <h4>Yêu cầu:</h4>
+  <ul>
+    <li>Docker, Docker Compose</li>
+    <li>DBVeaver</li>
+    <li>Python 3</li>
+  </ul>
 
+  <h4>Triển khai:</h4>
+  <pre><code>git clone &lt;repository-url&gt;
+cd &lt;repository-folder&gt;</code></pre>
+  <p><strong>Tải Dataset:</strong> <a href="https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies">Kaggle Dataset</a></p>
+  <p><strong>File ENV:</strong> lấy API Token từ <a href="https://www.themoviedb.org/">TMDB</a></p>
+  <img src="images/API.jpg" alt="API Access Token" />
+
+  <pre><code>python3 -V
+python3 -m venv venv
+source venv/bin/activate</code></pre>
+
+  <p><strong>Build container:</strong></p>
+  <pre><code>make build-dagster
+make build-spark
+make build-pipeline
+make build-streamlit
+make build
+make up</code></pre>
+
+  <h4>Load Dataset Vào MySQL:</h4>
+  <pre><code>make to_mysql_root
+SET GLOBAL local_infile=TRUE;
+SHOW VARIABLES LIKE "local_infile";
+make to_mysql
+source /tmp/mysql_schemas.sql;
+source /tmp/load_dataset/mysql_load.sql;</code></pre>
+
+  <h4>PostgreSQL:</h4>
+  <pre><code>make to_psql
+source /tmp/load_dataset/psql_datasource.sql;</code></pre>
+
+  <h4>Chạy Dagster:</h4>
+  <p>Mở <code>http://localhost:3001</code> để chạy assets.</p>
+
+  <h4>DBT:</h4>
+  <pre><code>cd elt_pipeline/dbt_movies
+dbt debug
+dbt build</code></pre>
+
+  <h4>Streamlit:</h4>
+  <img src="images/streamlit.jpg" alt="Streamlit App" />
+
+  <h2>Lời kết</h2>
+  <p>Đây là dự án Data Pipeline thứ hai của mình. Qua đó mình học được cách triển khai kiến trúc ELT hiện đại, sử dụng Spark, DBT, Dagster và trình bày bằng Streamlit.</p>
+  <p><strong>Happy Coding!</strong></p>
   <p><a href="index.html">← Quay lại Portfolio</a></p>
 </body>
 </html>
