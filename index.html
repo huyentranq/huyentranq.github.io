@@ -110,6 +110,28 @@
       text-align: center;
       font-size: 0.9rem;
     }
+    .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 0.8rem 1rem;
+    color: #000;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+  
+  .contact-item img {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.8rem;
+  }
+
   </style>
 </head>
 
@@ -134,21 +156,39 @@
       <img class="profile-img" src="your-avatar.png" alt="Profile Image">
     </div>
 
-    <div class="section" id="contact">
-      <h3>Contact</h3>
-      <div class="contact-links">
-        <a href="mailto:your.email@example.com">📧 nguyenhuyentrangg457@gmail.com</a>
-        <a href="tel:+84123456789">📞 +84 457 4767</a>
-        <a href="https://linkedin.com/in/yourprofile">🔗 LinkedIn</a>
-        <a href="https://github.com/huyentranq">💻 GitHub</a>
+  <div class="section" id="contact">
+    <h3>Contact</h3>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">
+          <img src="linkedin-icon.png" alt="LinkedIn"> LinkedIn
+        </a>
+      </div>
+      <div class="contact-item">
+        <a href="https://github.com/huyentranq" target="_blank">
+          <img src="github-icon.png" alt="GitHub"> Github
+        </a>
+      </div>
+      <div class="contact-item">
+        <img src="email-icon.png" alt="Email"> huyhoangv2003@gmail.com
+      </div>
+      <div class="contact-item">
+        <img src="phone-icon.png" alt="Phone"> +84 911 332 003
       </div>
     </div>
+  </div>
 
-    <div class="section" id="projects">
-      <h3>Projects</h3>
+
+  <div class="section" id="projects">
+    <h3>Projects</h3>
+    <a href="project1.html">
       <img src="project1.png" alt="Project 1">
+    </a>
+    <a href="project2.html">
       <img src="project2.png" alt="Project 2">
-    </div>
+    </a>
+  </div>
+
 
     <div class="section" id="competitions">
       <h3>Competitions & Awards</h3>
