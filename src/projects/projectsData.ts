@@ -15,7 +15,7 @@ export interface Project {
 export const projectsData: Project[] = [
   {
     id: 1,
-    title: "Real-time Data Pipeline",
+    title: "TMDB-Pipeline-Recommendation",
     description: "Built a scalable data pipeline using Apache Spark and Kafka for processing streaming data from multiple sources.",
     longDescription: "This project demonstrates a complete real-time data processing pipeline that ingests data from multiple sources, processes it using Apache Spark, and stores the results in a data lake architecture. The system handles high-throughput data streams and provides real-time analytics capabilities.",
     image: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=400",

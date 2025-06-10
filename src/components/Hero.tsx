@@ -6,7 +6,7 @@ const Hero: React.FC = () => {
     {
       icon: <Linkedin size={18} />,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/yourprofile"
+      href: "https://www.linkedin.com/in/trang-nguyen-huyen-674109249/"
     },
     {
       icon: <Github size={18} />,
@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
     },
     {
       icon: <Mail size={18} />,
-      label: "Email",
+      label: "nguyenhuyentrangg457@gmail.com",
       href: "mailto:nguyenhuyentrangg457@gmail.com"
     },
     {
@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
               </h3>
               <p className="text-base leading-relaxed mb-6 text-gray-300">
                 Passionate about data pipeline design, ETL/ELT architecture, and real-time data streaming.
-                Experienced with Spark, dbt, MySQL, MinIO, and AWS EC2/S3.
+                Experienced with Linux, Spark, dbt, SQL, MinIO.
                 Constantly learning and contributing to open-source and volunteer projects.
               </p>
               
@@ -67,15 +67,15 @@ const Hero: React.FC = () => {
 
               <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                 <span className="flex items-center gap-2 px-3 py-2 bg-primary-bg rounded-lg text-sm">
-                  <Database size={16} className="text-primary-accent" />
+                  <Database size={14} className="text-primary-accent" />
                   <span>Data Engineering</span>
                 </span>
                 <span className="flex items-center gap-2 px-3 py-2 bg-primary-bg rounded-lg text-sm">
-                  <Code size={16} className="text-primary-accent" />
+                  <Code size={14} className="text-primary-accent" />
                   <span>ETL/ELT</span>
                 </span>
                 <span className="flex items-center gap-2 px-3 py-2 bg-primary-bg rounded-lg text-sm">
-                  <TrendingUp size={16} className="text-primary-accent" />
+                  <TrendingUp size={14} className="text-primary-accent" />
                   <span>Real-time Streaming</span>
                 </span>
               </div>
