@@ -1,4 +1,8 @@
 # Data Engineer Portfolio
+npm install react-markdown
+  npm install rehype-slug
+
+
 
 A modern, responsive personal portfolio website showcasing data engineering expertise, built with React, TypeScript, and Tailwind CSS.
 

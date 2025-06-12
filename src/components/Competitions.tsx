@@ -43,23 +43,38 @@ const Competitions: React.FC = () => {
     },
   ];
 
-  const renderItem = (item: any, index: number, total: number) => (
-    <div className="flex items-start gap-4 relative pb-6" key={index}>
-      <div className="flex-shrink-0 p-2 bg-primary-bg rounded-lg">{item.icon}</div>
-      <div className="flex-1">
-        <h3 className="text-lg font-bold text-primary-accent mb-1">{item.title}</h3>
-        <h4 className="text-base font-semibold mb-2 text-primary-text">{item.event}</h4>
-        <p className="text-gray-300 leading-relaxed text-sm">{item.description}</p>
+const renderItem = (item: any, index: number, total: number) => (
+  <div className="relative pl-10 pb-6" key={index}>
+    {/* Vertical line */}
+    {index < total - 1 && (
+      <span className="absolute left-5 top-6 h-full w-0.5 bg-white"></span>
+    )}
+
+    <div className="flex items-start gap-4">
+      {/* Icon */}
+      <div className="w-10 h-10 flex items-center justify-center bg-primary-bg rounded-full z-10">
+        {item.icon}
       </div>
-      {/* Vertical dot connector */}
-      {index < total - 1 && (
-        <div className="absolute left-2 top-full w-0.5 h-6 bg-primary-accent mx-auto rounded-full" />
-      )}
+
+      {/* Content */}
+      <div className="flex-1">
+        <h3 className="text-lg font-bold text-primary-accent mb-1">
+          {item.title}
+        </h3>
+        <h4 className="text-base font-semibold mb-2 text-primary-text">
+          {item.event}
+        </h4>
+        <p className="text-gray-300 leading-relaxed text-sm">
+          {item.description}
+        </p>
+      </div>
     </div>
-  );
+  </div>
+);
+
 
   return (
-    <section id="competitions" className="py-16 bg-primary-section/20">
+    <section id="competitions" className="py-5 bg-primary-section/20">
       <div className="section-container max-w-2xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12">
           <span className="text-primary-accent">Competitions</span> & Awards

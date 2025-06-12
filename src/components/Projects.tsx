@@ -1,5 +1,6 @@
 import React from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { Github } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { projectsData } from '../projects/projectsData';
 
 const Projects: React.FC = () => {
@@ -10,11 +11,12 @@ const Projects: React.FC = () => {
           <span className="text-primary-accent">Projects</span>
         </h2>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {projectsData.map((project) => (
-            <div
+            <Link 
               key={project.id}
-              className="section-bg overflow-hidden card-hover animate-slide-up"
+              to={`/project/${project.id}`}
+              className="block section-bg overflow-hidden card-hover animate-slide-up relative h-full"
             >
               <div className="relative h-40 overflow-hidden">
                 <img
@@ -22,25 +24,9 @@ const Projects: React.FC = () => {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-primary-bg/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                  <a
-                    href={project.githubUrl}
-                    className="p-2 bg-primary-section rounded-full hover:bg-primary-accent hover:text-primary-bg transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Github size={16} />
-                  </a>
-                  <a
-                    href={project.liveUrl}
-                    className="p-2 bg-primary-section rounded-full hover:bg-primary-accent hover:text-primary-bg transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                  </a>
-                </div>
               </div>
               
-              <div className="p-5">
+              <div className="p-5 flex flex-col">
                 <h3 className="text-lg font-bold mb-2 text-primary-accent">
                   {project.title}
                 </h3>
@@ -62,8 +48,23 @@ const Projects: React.FC = () => {
                     </span>
                   )}
                 </div>
+                {/* Thêm container flex cho thời gian và nút GitHub */}
+                <div className="mt-auto flex items-center justify-between">
+                  <div className="text-xs text-gray-400">
+                    {project.time}
+                  </div>
+                  <a 
+                    href={project.githubUrl}
+                    className="p-2 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()} // Ngăn click vào card khi bấm GitHub
+                  >
+                    <Github size={16} />
+                  </a>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         

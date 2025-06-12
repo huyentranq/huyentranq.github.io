@@ -5,6 +5,7 @@ export interface Project {
   longDescription: string;
   image: string;
   technologies: string[];
+  time: string[];
   githubUrl: string;
   liveUrl: string;
   features: string[];
@@ -20,6 +21,7 @@ export const projectsData: Project[] = [
     longDescription: "This project demonstrates a complete real-time data processing pipeline that ingests data from multiple sources, processes it using Apache Spark, and stores the results in a data lake architecture. The system handles high-throughput data streams and provides real-time analytics capabilities.",
     image: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=400",
     technologies: ["Apache Spark", "Kafka", "Python", "AWS S3", "Docker", "Kubernetes"],
+    time: "December 2020",
     githubUrl: "https://github.com/huyentranq/realtime-data-pipeline",
     liveUrl: "#",
     features: [
@@ -51,6 +53,8 @@ export const projectsData: Project[] = [
     longDescription: "A modern data warehouse solution built with dbt and Snowflake, featuring automated ETL processes, data quality checks, and comprehensive business intelligence capabilities.",
     technologies: ["dbt", "Snowflake", "SQL", "Python", "Airflow", "Great Expectations"],
     githubUrl: "https://github.com/huyentranq/etl-data-warehouse",
+    time: "December 2020",
+
     liveUrl: "#",
     features: [
       "Automated ETL processes with dbt",
@@ -85,6 +89,8 @@ export const projectsData: Project[] = [
       "Query capabilities with Amazon Athena",
       "Infrastructure as Code with CloudFormation"
     ],
+    time: "December 2020",
+
     challenges: [
       "Designing cost-effective storage strategies",
       "Implementing proper data governance",

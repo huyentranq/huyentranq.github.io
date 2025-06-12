@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,md}'], // <== nếu bạn dùng file .md nội dung
   theme: {
     extend: {
       fontFamily: {
@@ -8,10 +8,10 @@ export default {
       },
       colors: {
         primary: {
-          bg: '#0f0f1a',
-          section: '#1a1a2e',
-          text: '#f1f1f1',
-          accent: '#ffc107',
+          bg: '#181818',       // Màu nền chính tối
+          section: '#242424',  // Nền cho section, hơi mờ đục
+          text: '#e0e0e0',     // Màu chữ mặc định (có thể không sử dụng nữa)
+          accent: '#74b9ff',   // Màu accent thay đổi sang tông ấm
         }
       },
       animation: {
@@ -32,8 +32,28 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         }
-      }
+      },
+      typography: (theme) => ({
+        invert: {
+          css: {
+            // Modified: Đổi màu chữ thành trắng
+            color: '#ffffff',
+            a: { color: theme('colors.primary.accent') },
+            strong: { color: '#ffffff' },
+            h1: { color: '#ffffff' },
+            h2: { color: '#ffffff' },
+            h3: { color: '#ffffff' },
+            blockquote: {
+              color: '#ffffff',
+              borderLeftColor: theme('colors.primary.accent'),
+            },
+            code: { color: theme('colors.primary.accent') },
+          }
+        }
+      })
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
