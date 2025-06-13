@@ -42,7 +42,7 @@ const Blog: React.FC = () => {
               key={post.id}
               className="section-bg p-6 card-hover animate-slide-up"
             >
-              <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
+              <div className="flex items-center justify-between gap-4 text-sm text-gray-400 mb-3">
                 <div className="flex items-center gap-1">
                   <Calendar size={14} />
                   <span>{new Date(post.date).toLocaleDateString()}</span>

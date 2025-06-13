@@ -23,7 +23,6 @@ const extractHeadings = (markdown: string): Heading[] => {
     // Lấy chỉ h2 (##) và h3 (###)
     if (level === 2 || level === 3) {
       const text = match[2].trim();
-      // Tạo id giống như rehype-slug (chuyển về chữ thường, thay thế ký tự không hợp lệ)
       const id = text.toLowerCase().replace(/[^\w]+/g, '-');
       headings.push({ id, text, level });
     }
@@ -70,7 +69,7 @@ const ProjectDetail: React.FC = () => {
   if (!project) return <div className="text-red-500">Project not found.</div>;
 
   return (
-    <div className="pt-20 px-4 max-w-3xl mx-auto"> {/* Modified: giảm kích cỡ container */}
+    <div className="pt-20 px-4 max-w-5xl mx-auto"> {/* Modified: giảm kích cỡ container */}
       {/* Breadcrumb */}
       <div className="text-lg text-gray-400 mb-2">
         <Link to="/#projects" className="flex items-center hover:underline">
@@ -112,12 +111,23 @@ const ProjectDetail: React.FC = () => {
               <ul className="space-y-2">
                 {headings.map((heading) => (
                   <li key={heading.id} style={{ marginLeft: (heading.level - 2) * 16 }}>
-                    <a 
-                      href={`#${heading.id}`} 
+                    <a
+                      href={`#${heading.id}`}
                       onClick={(e) => {
                         e.preventDefault();
                         const element = document.getElementById(heading.id);
-                        element?.scrollIntoView({ behavior: 'smooth' });
+                        if (element) {
+                          const headerOffset = 80; 
+                          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                          const offsetPosition = elementPosition - headerOffset;
+
+                          window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                          });
+
+                          setActiveHeading(heading.id);
+                        }
                       }}
                       className={`text-primary-accent hover:underline ${activeHeading === heading.id ? 'underline' : ''}`}
                     >

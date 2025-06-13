@@ -17,16 +17,16 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
 
 <p>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="60" style="margin-right: 50px;" title="Python" />
-  <img src="images/spark.png" width="100" style="margin-right: 50px;" title="Apache Spark" />
-  <img src="images/dagster.png" width="80" style="margin-right: 20px;" title="Dagster" />
-  <img src="images/dbt.png" width="100" title="dbt" />
+  <img src="../readmes/images/spark.png" width="100" style="margin-right: 50px;" title="Apache Spark" />
+  <img src="../readmes/images/dagster.png" width="80" style="margin-right: 20px;" title="Dagster" />
+  <img src="../readmes/images/dbt.png" width="100" title="dbt" />
 </p>
 
 <p>
   <img src="https://min.io/resources/img/logo/MINIO_Bird.png" width="40" title="MinIO"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="40" title="MySQL"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="40" title="PostgreSQL"/>
-  <img src="images/polar.png" width="80" title="Polars" />
+  <img src="../readmes/images/polar.png" width="80" title="Polars" />
   <img src="https://streamlit.io/images/brand/streamlit-logo-primary-colormark-darktext.svg" width="140" title="Streamlit"/> 
 </p>
 
@@ -35,21 +35,21 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
 
 ## Streamlit Interface
 
-![Streamlit UI](images/output.jpg)
+![Streamlit UI](../readmes/images/output.jpg)
 
 ---
 
 ## 3. Project Overview
 
-### 3.1. Data Pipeline Design
+### 3-1. Data Pipeline Design
 
-![Pipeline Diagram](images/pipeline.png)
+![Pipeline Diagram](../readmes/images/pipeline.png)
 
 **1. Data Sources – Collecting Data**
 
 - Movie data is collected from two main sources:
 
-  - `TMDB API`: Retrieves movie info from TMDB’s official API, including user-rated favorite movies.
+  - `TMDB API`: Retrieves movie info from TMDB's official API, including user-rated favorite movies.
   - `Kaggle`: Dataset (~1M) containing TMDB movie information.
 
 - `MySQL`: Raw, unprocessed Kaggle dataset (~1M rows) is first loaded into MySQL.
@@ -82,21 +82,21 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
 
 ---
 
-### 3.2. Data Lineage
+### 3-2. Data Lineage
 
 Dagster is used as the **orchestrator**. It allows managing, scheduling, and visualizing data pipelines.
 
-![Data lineage](images/lineage.jpg)
+![Data lineage](../readmes/images/lineage.jpg)
 
 **Detailed Breakdown by Layer**
 
-![Bronze Layer](images/bronze_layer.jpg)
+![Bronze Layer](../readmes/images/bronze_layer.jpg)
 
-![Silver Layer](images/silver.jpg)
+![Silver Layer](../readmes/images/silver.jpg)
 
-![Gold Layer](images/gold.jpg)
+![Gold Layer](../readmes/images/gold.jpg)
 
-![Warehouse Layer](images/warehouse.jpg)
+![Warehouse Layer](../readmes/images/warehouse.jpg)
 
 ---
 
@@ -123,7 +123,7 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 3. **Prepare the ENV File:**
    - Fill in the necessary details in the ENV file. For example, for TMDB, visit [TMDB](https://www.themoviedb.org/) to create an account, add some favorite movies, and then go to Settings/API to obtain your **API Access Token**. Add this token in your ENV file.
    - *(Feel free to customize the ENV file for additional configurations as needed.)*
-   - ![API Access Token](images/API.jpg)
+   - ![API Access Token](../readmes/images/API.jpg)
 
 4. **Set Up the Virtual Environment & Verify Python Installation:**
    ```sh
@@ -193,7 +193,7 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 ## 5. Automate Jobs & Run Assets with Dagster
 
 - Once the installation and data import are complete, open the Dagster UI (e.g., `http://localhost:3001`) to monitor and run the ELT assets.
-- Use the Dagster interface to track the pipeline’s progress, execute individual assets, and review logs to ensure everything is running smoothly.
+- Use the Dagster interface to track the pipeline's progress, execute individual assets, and review logs to ensure everything is running smoothly.
 
 ---
 
@@ -211,12 +211,12 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 ## 7. Explore the Application with Streamlit
 
 - Access the Streamlit interface to view dashboards, movie recommendations, and visualizations.
-  ![Streamlit Interface](images/streamlit.jpg)
+  ![Streamlit Interface](../readmes/images/streamlit.jpg)
 
 ---
 
 ## Conclusion
 
-This is my second Data Pipeline project, through which we’ve had the opportunity to learn and implement new technologies within the Data Engineering field. We hope that this source code serves as a valuable reference for developers and learners exploring data-driven solutions.
+This is my second Data Pipeline project, through which we've had the opportunity to learn and implement new technologies within the Data Engineering field. We hope that this source code serves as a valuable reference for developers and learners exploring data-driven solutions.
 
 **Happy Coding!**

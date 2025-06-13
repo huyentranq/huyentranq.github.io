@@ -22,7 +22,7 @@ export const projectsData: Project[] = [
     image: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=400",
     technologies: ["Apache Spark", "Kafka", "Python", "AWS S3", "Docker", "Kubernetes"],
     time: "December 2020",
-    githubUrl: "https://github.com/huyentranq/realtime-data-pipeline",
+    githubUrl: "https://github.com/huyentranq/TMDB-Pipeline-Recommendation",
     liveUrl: "#",
     features: [
       "Real-time data ingestion from multiple sources",
