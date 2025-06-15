@@ -1,0 +1,22 @@
+# Windows Zone.Identifier metadata
+*.Zone.Identifier
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+.bolt/
+
+# Vite dev files (có thể tùy chọn)
+.vite/
+
+# Log hoặc text thử nghiệm
+text.txt
+
+# Nếu bạn dùng WSL hoặc VSCode tự sinh meta
+*.ts:Zone.Identifier
+*.js:Zone.Identifier
+*.json:Zone.Identifier
+*.html:Zone.Identifier
+*.md:Zone.Identifier
