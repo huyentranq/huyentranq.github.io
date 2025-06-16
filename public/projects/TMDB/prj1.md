@@ -11,7 +11,8 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
 
 ## Streamlit Interface
 
-![Streamlit UI](/projects/TMDB/images/output.jpg)
+![Streamlit UI](images/output.jpg)
+<img src="images/output.jpg" alt="My Project" />
 
 ---
 
