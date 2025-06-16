@@ -27,7 +27,7 @@ const ProjectDetail = () => {
         switch (slug) {
           case 'movie-recommendation-system':
             try {
-              const response = await fetch('/projects/TMDB/prj1.md');
+              const response = await fetch(`${import.meta.env.BASE_URL}projects/TMDB/prj1.md`);
               if (!response.ok) throw new Error('Failed to load markdown');
               projectContent = await response.text();
             } catch (err) {
@@ -36,6 +36,7 @@ const ProjectDetail = () => {
               return;
             }
             break;
+
 
           default:
             setError(true);

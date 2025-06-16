@@ -2,7 +2,6 @@
 
 A beautiful, modern personal portfolio website built with React, TypeScript, and Tailwind CSS. Features dark mode by default, smooth animations, and a complete project showcase system.
 
-![Portfolio Preview](https://images.pexels.com/photos/1181472/pexels-photo-1181472.jpeg?auto=compress&cs=tinysrgb&w=1200)
 
 ## ✨ Features
 
