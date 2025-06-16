@@ -11,8 +11,7 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
 
 ## Streamlit Interface
 
-![Streamlit](**/huyentrang.github.io/**projects/TMDB/images/output.jpg)
-<img src="images/output.jpg" alt="My Project" />
+![Streamlit UI](/huyentrang.github.io/projects/TMDB/images/output.jpg)
 
 ---
 
@@ -20,7 +19,7 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
 
 ### Data Pipeline Design
 
-![Pipeline Diagram](/projects/TMDB/images/pipeline.png)
+![Pipeline Diagram](/huyentrang.github.io/projects/TMDB/images/pipeline.png)
 
 #### 1. Data Sources
 
@@ -62,7 +61,7 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
 Dagster is used as the **orchestrator**. It allows managing, scheduling, and visualizing data pipelines.
 
 #### Data lineage
-![Data lineage](/projects/TMDB/images/lineage.jpg)
+![Data lineage](/huyentrang.github.io/projects/TMDB/images/lineage.jpg)
 
    - The raw data is loaded from MySQL and the TMDB API.
    - At the silver level, the data is cleaned, normalized, and the tables are split in preparation for recommendations at the gold level.
@@ -74,21 +73,21 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 #### Detailed Breakdown by Layer
 
 **1. Bronze Layer**  
-![Bronze Layer](/projects/TMDB/images/bronze_layer.jpg)
+![Bronze Layer](/huyentrang.github.io/projects/TMDB/images/bronze_layer.jpg)
 
 - `bronze_movies`: dataset ~1M rows from MySQL
 - `bronze_genre_track`: dataset self-collected to support transformation
 - `bronze_favorite_movies`: calls TMDB API (utils/TMDBLoader) to fetch personal favorite movies
 
 **2. Silver Layer**  
-![Silver Layer](/projects/TMDB/images/silver.jpg)
+![Silver Layer](/huyentrang.github.io/projects/TMDB/images/silver.jpg)
 
 - `silver_movies_cleaned`, `silver_favorite_track`: clean, normalize, and transform data from `bronze_movies` and `bronze_favorite_movies` using Apache Spark
 - `silver_movies_vectors`: extract features for recommendation from `silver_movies_cleaned`
 - `silver_my_vector`: extract necessary features (columns) for recommendation
 
 **3. Gold Layer**  
-![Gold Layer](/projects/TMDB/images/gold.jpg)
+![Gold Layer](/huyentrang.github.io/projects/TMDB/images/gold.jpg)
 
 - `gold_movies_infor` / `rating` / `genres`: split information respectively for infor, rating, and genres from `silver_movies_cleaned`
 - `gold_my_vector`: transform personal movie vector data and combine all features into a single vector (ML Spark)
@@ -96,7 +95,7 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 - `gold_recommendations`: create recommendation scores based on `gold_my_vector` and `gold_movies_vector`
 
 **4. Warehouse Layer**  
-![Warehouse Layer](/projects/TMDB/images/warehouse.jpg)
+![Warehouse Layer](/huyentrang.github.io/projects/TMDB/images/warehouse.jpg)
 
 - `movies_infor` / `genres` / `rating`: load data from `gold_movies_infor` / `rating` / `genres` from the Gold layer
 - `favorite_track`: load from `silver_favorite_track`, containing personal favorite movies (cleaned)
@@ -125,7 +124,7 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 3. **Prepare the ENV File:**
    - Fill in the necessary details in the ENV file. For example, for TMDB, visit [TMDB](https://www.themoviedb.org/) to create an account, add some favorite movies, and then go to Settings/API to obtain your **API Access Token**. Add this token in your ENV file.
    - *(Feel free to customize the ENV file for additional configurations as needed.)*
-   - ![API Access Token](/projects/TMDB/images/API.jpg)
+   - ![API Access Token](/huyentrang.github.io/projects/TMDB/images/API.jpg)
 
 4. **Set Up the Virtual Environment & Verify Python Installation:**
    ```sh
@@ -216,7 +215,7 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 ## Explore with Streamlit
 
 - Access the Streamlit interface to view dashboards, movie recommendations, and visualizations.
-  ![Streamlit Interface](/projects/TMDB/images/streamlit.jpg)
+   ![Streamlit Interface](/huyentrang.github.io/projects/TMDB/images/streamlit.jpg)
 
 ---
 
