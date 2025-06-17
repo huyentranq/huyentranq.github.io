@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, ExternalLink, Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react';
+import {
+  Download, ExternalLink, Mail, Phone, MapPin, Linkedin, Github, Trophy, Award
+} from 'lucide-react';
 
 const Resume = () => {
   const experience = [
@@ -25,42 +27,36 @@ const Resume = () => {
         'Optimized database queries improving performance by 60%',
         'Collaborated with data scientists to productionize ML models'
       ]
-    },
-    {
-      title: 'Software Developer',
-      company: 'StartupXYZ',
-      period: '2019 - 2020',
-      description: [
-        'Developed full-stack web applications using React and Node.js',
-        'Implemented RESTful APIs and integrated third-party services',
-        'Built automated testing suites and CI/CD pipelines',
-        'Worked in agile environment with cross-functional teams'
-      ]
     }
   ];
 
   const education = [
     {
-      degree: 'Master of Science in Computer Science',
-      school: 'University of Technology',
-      period: '2017 - 2019',
-      details: 'Specialization in Data Science and Machine Learning • GPA: 3.9/4.0'
-    },
-    {
-      degree: 'Bachelor of Science in Software Engineering',
-      school: 'State University',
-      period: '2013 - 2017',
-      details: 'Magna Cum Laude • GPA: 3.8/4.0'
+      degree: 'Bachelor of Data Science',
+      school: 'University of Science - VNUHCM',
+      period: '2023 - 2027',
+      details: 'Accumulated GPA: 3.8/4'
     }
   ];
 
   const skills = {
     'Data Engineering': ['Apache Spark', 'Kafka', 'Airflow', 'Hadoop', 'Snowflake'],
     'Programming': ['Python', 'SQL', 'Scala', 'Java', 'JavaScript'],
-    'Cloud Platforms': ['AWS', 'Google Cloud', 'Azure', 'Databricks'],
+    // 'Cloud Platforms': ['AWS', 'Google Cloud', 'Azure', 'Databricks'],
     'Databases': ['PostgreSQL', 'MongoDB', 'Redis', 'Cassandra', 'BigQuery'],
-    'Tools & DevOps': ['Docker', 'Kubernetes', 'Terraform', 'Git', 'Jenkins']
+    // 'Tools & DevOps': ['Docker', 'Kubernetes', 'Terraform', 'Git', 'Jenkins']
   };
+
+  const competitions = [
+    { title: 'SCUDEM IX (International Challenge on Differential Equations Modeling)', rank: '2nd Place' },
+    { title: 'MCM/ICM 2025 (International Mathematical Contest in Modeling)', rank: 'Honorable Award' },
+    { title: 'MDS Datathon Challenge in Business', rank: 'Top 20' },
+  ];
+
+  const certificates = [
+    { title: 'Advanced SQL Certificate - Hackerank', issuer: 'Amazon Web Services' },
+    { title: 'Fundamental Data Engineer', issuer: 'Google Cloud' },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -98,8 +94,6 @@ const Resume = () => {
         <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Data Engineer with 5+ years of experience building scalable data infrastructure and analytics platforms
         </p>
-        
-        {/* Download Buttons */}
         <div className="flex justify-center space-x-3">
           <a
             href="https://drive.google.com/file/d/your-resume-file-id/view"
@@ -126,128 +120,99 @@ const Resume = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
           <div className="flex items-center space-x-2">
             <Mail className="w-4 h-4 text-blue-500" />
-            <span className="text-gray-700 dark:text-gray-300 text-sm">your.email@example.com</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">nguyenhuyentrangg457@gmail.com</span>
           </div>
           <div className="flex items-center space-x-2">
             <Phone className="w-4 h-4 text-green-500" />
-            <span className="text-gray-700 dark:text-gray-300 text-sm">+1 (555) 123-4567</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">+1 (555) 123-4567</span>
           </div>
           <div className="flex items-center space-x-2">
             <MapPin className="w-4 h-4 text-red-500" />
-            <span className="text-gray-700 dark:text-gray-300 text-sm">San Francisco, CA</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">Thu Duc - Ho Chi Minh</span>
           </div>
           <div className="flex items-center space-x-2">
             <Linkedin className="w-4 h-4 text-blue-600" />
-            <span className="text-gray-700 dark:text-gray-300 text-sm">linkedin.com/in/johndoe</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">linkedin.com/in/johndoe</span>
           </div>
         </div>
       </motion.section>
+{/* Education + Competitions + Certificates */}
+<motion.section variants={itemVariants} className="space-y-6">
+  <h2 className="text-2xl font-bold text-center">Education & Achievements</h2>
 
-      {/* Experience */}
-      <motion.section variants={itemVariants} className="space-y-6">
-        <h2 className="text-2xl font-bold text-center">Experience</h2>
-        <div className="space-y-6">
-          {experience.map((job, index) => (
-            <motion.div
-              key={`${job.company}-${job.period}`}
-              className="bg-gray-50 dark:bg-gray-800 rounded-lg p-5"
-              initial={{ x: -30, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                <div>
-                  <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400">{job.title}</h3>
-                  <p className="text-base text-gray-800 dark:text-gray-200">{job.company}</p>
-                </div>
-                <span className="text-gray-600 dark:text-gray-400 font-medium text-sm">{job.period}</span>
-              </div>
-              <ul className="space-y-1 text-gray-700 dark:text-gray-300">
-                {job.description.map((item, idx) => (
-                  <li key={idx} className="flex items-start text-sm">
-                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
+  <div className="grid md:grid-cols-[0.9fr_1.1fr] gap-4">
 
-      {/* Education */}
-      <motion.section variants={itemVariants} className="space-y-6">
-        <h2 className="text-2xl font-bold text-center">Education</h2>
-        <div className="grid md:grid-cols-2 gap-5">
+
+        {/* Education */}
+        <div className="space-y-4 max-w-sm">
           {education.map((edu, index) => (
             <motion.div
               key={edu.degree}
-              className="bg-gray-50 dark:bg-gray-800 rounded-lg p-5"
+              className="bg-gray-50 dark:bg-gray-800 rounded-md p-4"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <h3 className="text-base font-semibold text-green-600 dark:text-green-400 mb-2">{edu.degree}</h3>
-              <p className="text-base text-gray-800 dark:text-gray-200 mb-1">{edu.school}</p>
-              <p className="text-gray-600 dark:text-gray-400 mb-2 text-sm">{edu.period}</p>
-              <p className="text-gray-700 dark:text-gray-300 text-sm">{edu.details}</p>
+              <h3 className="text-base font-semibold text-green-600 dark:text-green-400 mb-1">
+                {edu.degree}
+              </h3>
+              <p className="text-sm text-gray-800 dark:text-gray-200">{edu.school}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{edu.period}</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{edu.details}</p>
             </motion.div>
           ))}
         </div>
-      </motion.section>
 
-      {/* Skills */}
-      <motion.section variants={itemVariants} className="space-y-6">
-        <h2 className="text-2xl font-bold text-center">Technical Skills</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {Object.entries(skills).map(([category, skillList], index) => (
-            <motion.div
-              key={category}
-              className="bg-gray-50 dark:bg-gray-800 rounded-lg p-5"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <h3 className="text-base font-semibold text-purple-600 dark:text-purple-400 mb-3">{category}</h3>
-              <div className="flex flex-wrap gap-1">
-                {skillList.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
-                  >
-                    {skill}
+        {/* Competitions & Certificates */}
+        <div className="space-y-6 ">
+          {/* Competitions */}
+          <div>
+            <h3 className="text-lg font-semibold mb-3 flex items-center text-blue-600 dark:text-blue-400">
+              <Trophy className="mr-2 w-5 h-5" /> Competitions
+            </h3>
+            <div className="space-y-3 pl-4 border-l border-gray-300 dark:border-gray-600">
+              {competitions.map((comp) => (
+                <div
+                  key={comp.title}
+                  className="text-sm text-gray-900 dark:text-white"
+                >
+                  <span className="font-semibold mr-2">{comp.rank}</span>
+                  <span>{comp.title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Certificates */}
+          <div>
+            <h3 className="text-lg font-semibold mb-3 flex items-center text-green-600 dark:text-green-400">
+              <Award className="mr-2 w-5 h-5" /> Certificates
+            </h3>
+            <div className="space-y-3 pl-4 border-l border-gray-300 dark:border-gray-600">
+              {certificates.map((cert) => (
+                <div
+                  key={cert.title}
+                  className="text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  {cert.title}{' '}
+                  <span className="text-sm font-normal text-gray-600 dark:text-gray-400">
+                    ({cert.issuer})
                   </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </motion.section>
+      </div>
+    </motion.section>
+
 
       {/* CTA */}
       <motion.section variants={itemVariants} className="text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
         <h2 className="text-xl font-bold mb-3">Let's Work Together</h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
           I'm always interested in new opportunities and challenging data engineering projects.
         </p>
-        <div className="flex justify-center space-x-3">
-          <a
-            href="mailto:your.email@example.com"
-            className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200 text-sm"
-          >
-            <Mail className="mr-2 w-4 h-4" />
-            Email Me
-          </a>
-          <a
-            href="https://linkedin.com/in/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-medium transition-colors duration-200 text-sm"
-          >
-            <Linkedin className="mr-2 w-4 h-4" />
-            LinkedIn
-          </a>
-        </div>
       </motion.section>
     </motion.div>
   );

@@ -125,7 +125,7 @@ const ProjectDetail = () => {
           )}
 
           <motion.article
-            className="prose prose-invert prose-xl max-w-none"
+            className="text-base leading-loose text-gray-800 dark:text-gray-200"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -133,38 +133,84 @@ const ProjectDetail = () => {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
-              components={{
-                h1: ({ children, ...props }) => (
-                  <h1 id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} {...props}>
-                    {children}
-                  </h1>
-                ),
-                h2: ({ children, ...props }) => (
-                  <h2 id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} {...props}>
-                    {children}
-                  </h2>
-                ),
-                h3: ({ children, ...props }) => (
-                  <h3 id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} {...props}>
-                    {children}
-                  </h3>
-                ),
-                h4: ({ children, ...props }) => (
-                  <h4 id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} {...props}>
-                    {children}
-                  </h4>
-                ),
-                h5: ({ children, ...props }) => (
-                  <h5 id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} {...props}>
-                    {children}
-                  </h5>
-                ),
-                h6: ({ children, ...props }) => (
-                  <h6 id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')} {...props}>
-                    {children}
-                  </h6>
-                ),
-              }}
+            components={{
+              h1: ({ children, ...props }) => (
+                <h1
+                  className="text-4xl font-extrabold mt-12 mb-6 leading-tight border-b border-neutral-500 pb-2 text-blue-500"
+                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                  {...props}
+                >
+                  {children}
+                </h1>
+              ),
+              h2: ({ children, ...props }) => (
+                <h2
+                  className="text-3xl font-bold mt-10 mb-5 leading-snug border-b border-neutral-400 pb-1 text-blue-400"
+                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                  {...props}
+                >
+                  {children}
+                </h2>
+              ),
+              h3: ({ children, ...props }) => (
+                <h3
+                  className="text-xl font-bold mt-10 mb-5 leading-snug  text-blue-300"
+                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                  {...props}
+                >
+                  {children}
+                </h3>
+              ),
+              h4: ({ children, ...props }) => (
+                <h4
+                  className="text-base font-semibold tracking-wide mt-4 mb-2 text-blue-300"
+                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                  {...props}
+                >
+                  {children}
+                </h4>
+              ),
+              h5: ({ children, ...props }) => (
+                <h5
+                  className="text-base font-semibold tracking-wide mt-4 mb-2 text-neutral-300"
+
+                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                  {...props}
+                >
+                  {children}
+                </h5>
+              ),
+              h6: ({ children, ...props }) => (
+                <h6
+                  className="text-base font-medium mt-5 mb-2 leading-normal text-neutral-200"
+                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                  {...props}
+                >
+                  {children}
+                </h6>
+              ),
+
+              // p: ({ children, ...props }) => (
+              //   <p className="text-sm leading-7 mb-4" {...props}>
+              //     {children}
+              //   </p>
+              // ),
+              ul: ({ children, ...props }) => (
+                <ul className="list-disc ml-6 mb-4 space-y-2" {...props}>
+                  {children}
+                </ul>
+              ),
+              ol: ({ children, ...props }) => (
+                <ol className="list-decimal ml-6 mb-4 space-y-2" {...props}>
+                  {children}
+                </ol>
+              ),
+              li: ({ children, ...props }) => (
+                <li className="leading-7" {...props}>
+                  {children}
+                </li>
+              ),
+            }}
             >
               {content}
             </ReactMarkdown>
@@ -175,6 +221,8 @@ const ProjectDetail = () => {
           <TableOfContents headings={headings} />
         </div>
       </div>
+
+      
     </motion.div>
   );
 };

@@ -17,8 +17,8 @@ const Navbar = () => {
 
   const socialLinks = [
     { href: 'https://github.com/yourusername', icon: Github, label: 'GitHub' },
-    { href: 'https://linkedin.com/in/yourusername', icon: Linkedin, label: 'LinkedIn' },
-    { href: 'mailto:your.email@example.com', icon: Mail, label: 'Email' },
+    { href: 'https://www.linkedin.com/in/trang-nguyen-huyen-674109249/', icon: Linkedin, label: 'LinkedIn' },
+    { href: 'nguyenhuyentrangg457@gmail.com', icon: Mail, label: 'Email' },
   ];
 
   return (

@@ -7,21 +7,21 @@ TMDB-Pipeline-Recommendation is a Data Engineering project that builds a complet
 
 The project focuses on designing a full-fledged ELT pipeline, starting from data collection (Kaggle, TMDB API), transformation using Apache Spark following Lakehouse architecture, storage in PostgreSQL, data modeling with DBT, and visualization with Streamlit. Dagster is used as the data orchestrator.
 
----
 
-## Streamlit Interface
+
+### 1.Streamlit Interface
 
 ![Streamlit UI](/huyentrang.github.io/projects/TMDB/images/output.jpg)
 
----
 
-## Project Overview
 
-### Data Pipeline Design
+### 2.Project Overview
+
+#### 2.1.Data Pipeline Design
 
 ![Pipeline Diagram](/huyentrang.github.io/projects/TMDB/images/pipeline.png)
 
-#### 1. Data Sources
+##### 1. Data Sources
 
 - Movie data is collected from two main sources:
 
@@ -29,7 +29,7 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
   - `Kaggle`: Dataset (~1M) containing TMDB movie information.
 
 - `MySQL`: Raw, unprocessed Kaggle dataset (~1M rows) is first loaded into MySQL.
-#### 2. Lakehouse
+##### 2. Lakehouse
 
   - `Apache Spark`: High-speed big data processing, structured into multiple layers:
     - **Bronze**: Stores raw ingested data
@@ -41,26 +41,25 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
   - `Spark MLlib`: Used for simple ML techniques or content-based recommendation.
 
 
-#### 3. Data Warehouse
+##### 3. Data Warehouse
 
 - Once processed, data flows from Bronze → Silver → Gold, then into a PostgreSQL data warehouse.
 
   - `DBT`: Builds intermediate data models to simplify queries for the frontend.
 
-#### 4. Streamlit – User Interface
+##### 4. Streamlit – User Interface
 
 - Streamlit is used to create the user interface, with three main features:
   - **Recommendations**: Suggest movies based on behavior/content
   - **Visualizations**: Dashboards and charts from movie data
   - **Search Information**: Filter movies by rating, genre, release year
 
----
 
-### Data Lineage
+
+#### 2.2.Data Lineage
 
 Dagster is used as the **orchestrator**. It allows managing, scheduling, and visualizing data pipelines.
 
-#### Data lineage
 ![Data lineage](/huyentrang.github.io/projects/TMDB/images/lineage.jpg)
 
    - The raw data is loaded from MySQL and the TMDB API.
@@ -70,23 +69,27 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 
    (In the warehouse, a slight transformation is performed using dbt.)
 
-#### Detailed Breakdown by Layer
 
-**1. Bronze Layer**  
+##### Detailed Breakdown by Layer
+
+###### 2.2.1. Bronze Layer
+
 ![Bronze Layer](/huyentrang.github.io/projects/TMDB/images/bronze_layer.jpg)
 
 - `bronze_movies`: dataset ~1M rows from MySQL
 - `bronze_genre_track`: dataset self-collected to support transformation
 - `bronze_favorite_movies`: calls TMDB API (utils/TMDBLoader) to fetch personal favorite movies
 
-**2. Silver Layer**  
+###### 2.2.2. Silver Layer
+
 ![Silver Layer](/huyentrang.github.io/projects/TMDB/images/silver.jpg)
 
 - `silver_movies_cleaned`, `silver_favorite_track`: clean, normalize, and transform data from `bronze_movies` and `bronze_favorite_movies` using Apache Spark
 - `silver_movies_vectors`: extract features for recommendation from `silver_movies_cleaned`
 - `silver_my_vector`: extract necessary features (columns) for recommendation
 
-**3. Gold Layer**  
+###### 2.2.3. Gold Layer
+
 ![Gold Layer](/huyentrang.github.io/projects/TMDB/images/gold.jpg)
 
 - `gold_movies_infor` / `rating` / `genres`: split information respectively for infor, rating, and genres from `silver_movies_cleaned`
@@ -94,23 +97,24 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
 - `gold_movies_vector`: transform `silver_movies_vectors` for each movie to generate movie vectors
 - `gold_recommendations`: create recommendation scores based on `gold_my_vector` and `gold_movies_vector`
 
-**4. Warehouse Layer**  
+###### 2.2.4. Warehouse Layer
+
 ![Warehouse Layer](/huyentrang.github.io/projects/TMDB/images/warehouse.jpg)
 
 - `movies_infor` / `genres` / `rating`: load data from `gold_movies_infor` / `rating` / `genres` from the Gold layer
 - `favorite_track`: load from `silver_favorite_track`, containing personal favorite movies (cleaned)
 - `recommendations`: load the `gold_recommendations` table to display
-----
 
-## Installation & Deployment Steps
 
-### Prerequisites
+### 3.Installation & Deployment Steps
+
+#### 3.1.Prerequisites
 
 - Docker & Docker Compose
 - DBeaver or any SQL management tool (for PostgreSQL and MySQL)
 - Python 3
 
-### Setup Steps
+#### 3.2.Setup Steps
 
 1. **Clone the Repository:**
    ```sh
@@ -150,11 +154,9 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
    - Once running, use Docker Desktop to monitor container progress.
 
 
----
 
-### Load Dataset into MySQL & PostgreSQL
 
-**Load into MySQL**
+#### 3.3.Load Dataset into MySQL & PostgreSQL
 
 
 **Loading Dataset into MySQL**
@@ -192,16 +194,15 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
    ```
 3. Verify the Imported Data:
    Use DBeaver (or another SQL tool) to connect to PostgreSQL and verify the database schema and data.
----
 
-### Automate Jobs with Dagster
+
+### 4.Automate Jobs with Dagster
 
 - Open Dagster UI: `http://localhost:3001`
 - Run and monitor ELT assets
 - Use the Dagster interface to track the pipeline’s progress, execute individual assets, and review logs to ensure everything is running smoothly.
----
 
-### Build Query Models Using DBT
+### 5.Build Query Models Using DBT
 
 - After loading data into the warehouse, navigate to the dbt project folder and build your models sequentially:
    ```sh
@@ -210,16 +211,16 @@ Dagster is used as the **orchestrator**. It allows managing, scheduling, and vis
    dbt build
    ```
 
----
 
-## Explore with Streamlit
+
+### 6.Explore with Streamlit
 
 - Access the Streamlit interface to view dashboards, movie recommendations, and visualizations.
    ![Streamlit Interface](/huyentrang.github.io/projects/TMDB/images/streamlit.jpg)
 
----
 
-## Conclusion
+
+### 7.Conclusion
 
 This is my second Data Pipeline project, through which I’ve had the opportunity to learn and implement new technologies within the Data Engineering field. We hope that this source code serves as a valuable reference for developers and learners exploring data-driven solutions.
 
