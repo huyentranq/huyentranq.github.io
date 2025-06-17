@@ -12,7 +12,7 @@ import ScrollToTop from './components/ScrollToTop'; // ✅ đã import
 function App() {
   return (
     <ThemeProvider>
-      <Router basename="/huyentrang.github.io">
+      <Router>
         <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
           <Navbar />
           <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
