@@ -15,8 +15,17 @@ const ProjectDetail = () => {
   const [headings, setHeadings] = useState<Array<{ id: string; text: string; level: number }>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const meta = slug ? projectsMeta[slug] : null;
+
+  const handleImageClick = (src: string) => {
+    setSelectedImage(src);
+  };
+
+  const handleCloseImage = () => {
+    setSelectedImage(null);
+  };
 
   useEffect(() => {
     const loadProject = async () => {
@@ -36,7 +45,6 @@ const ProjectDetail = () => {
               return;
             }
             break;
-
 
           default:
             setError(true);
@@ -105,7 +113,6 @@ const ProjectDetail = () => {
             </Link>
           </motion.div>
 
-          {/* GitHub Repo Card (only if exists) */}
           {meta?.githubUrl && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -133,84 +140,86 @@ const ProjectDetail = () => {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
-            components={{
-              h1: ({ children, ...props }) => (
-                <h1
-                  className="text-4xl font-extrabold mt-12 mb-6 leading-tight border-b border-neutral-500 pb-2 text-blue-500"
-                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
-                  {...props}
-                >
-                  {children}
-                </h1>
-              ),
-              h2: ({ children, ...props }) => (
-                <h2
-                  className="text-3xl font-bold mt-10 mb-5 leading-snug border-b border-neutral-400 pb-1 text-blue-400"
-                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
-                  {...props}
-                >
-                  {children}
-                </h2>
-              ),
-              h3: ({ children, ...props }) => (
-                <h3
-                  className="text-xl font-bold mt-10 mb-5 leading-snug  text-blue-300"
-                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
-                  {...props}
-                >
-                  {children}
-                </h3>
-              ),
-              h4: ({ children, ...props }) => (
-                <h4
-                  className="text-base font-semibold tracking-wide mt-4 mb-2 text-blue-300"
-                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
-                  {...props}
-                >
-                  {children}
-                </h4>
-              ),
-              h5: ({ children, ...props }) => (
-                <h5
-                  className="text-base font-semibold tracking-wide mt-4 mb-2 text-neutral-300"
-
-                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
-                  {...props}
-                >
-                  {children}
-                </h5>
-              ),
-              h6: ({ children, ...props }) => (
-                <h6
-                  className="text-base font-medium mt-5 mb-2 leading-normal text-neutral-200"
-                  id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
-                  {...props}
-                >
-                  {children}
-                </h6>
-              ),
-
-              // p: ({ children, ...props }) => (
-              //   <p className="text-sm leading-7 mb-4" {...props}>
-              //     {children}
-              //   </p>
-              // ),
-              ul: ({ children, ...props }) => (
-                <ul className="list-disc ml-6 mb-4 space-y-2" {...props}>
-                  {children}
-                </ul>
-              ),
-              ol: ({ children, ...props }) => (
-                <ol className="list-decimal ml-6 mb-4 space-y-2" {...props}>
-                  {children}
-                </ol>
-              ),
-              li: ({ children, ...props }) => (
-                <li className="leading-7" {...props}>
-                  {children}
-                </li>
-              ),
-            }}
+              components={{
+                h1: ({ children, ...props }) => (
+                  <h1
+                    className="text-4xl font-extrabold mt-12 mb-6 leading-tight border-b border-neutral-500 pb-2 text-blue-500"
+                    id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                    {...props}
+                  >
+                    {children}
+                  </h1>
+                ),
+                h2: ({ children, ...props }) => (
+                  <h2
+                    className="text-3xl font-bold mt-10 mb-5 leading-snug border-b border-neutral-400 pb-1 text-blue-400"
+                    id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                    {...props}
+                  >
+                    {children}
+                  </h2>
+                ),
+                h3: ({ children, ...props }) => (
+                  <h3
+                    className="text-xl font-bold mt-10 mb-5 leading-snug text-blue-300"
+                    id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                    {...props}
+                  >
+                    {children}
+                  </h3>
+                ),
+                h4: ({ children, ...props }) => (
+                  <h4
+                    className="text-base font-semibold tracking-wide mt-4 mb-2 text-blue-300"
+                    id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                    {...props}
+                  >
+                    {children}
+                  </h4>
+                ),
+                h5: ({ children, ...props }) => (
+                  <h5
+                    className="text-base font-semibold tracking-wide mt-4 mb-2 text-neutral-300"
+                    id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                    {...props}
+                  >
+                    {children}
+                  </h5>
+                ),
+                h6: ({ children, ...props }) => (
+                  <h6
+                    className="text-base font-medium mt-5 mb-2 leading-normal text-neutral-200"
+                    id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                    {...props}
+                  >
+                    {children}
+                  </h6>
+                ),
+                ul: ({ children, ...props }) => (
+                  <ul className="list-disc ml-6 mb-4 space-y-2" {...props}>
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children, ...props }) => (
+                  <ol className="list-decimal ml-6 mb-4 space-y-2" {...props}>
+                    {children}
+                  </ol>
+                ),
+                li: ({ children, ...props }) => (
+                  <li className="leading-7" {...props}>
+                    {children}
+                  </li>
+                ),
+                img: ({ src = '', alt = '', ...props }) => (
+                  <img
+                    src={src}
+                    alt={alt}
+                    className="cursor-zoom-in max-w-full rounded-lg shadow-md my-4"
+                    onClick={() => handleImageClick(src)}
+                    {...props}
+                  />
+                ),
+              }}
             >
               {content}
             </ReactMarkdown>
@@ -222,7 +231,19 @@ const ProjectDetail = () => {
         </div>
       </div>
 
-      
+      {/* Modal overlay to view full image */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onClick={handleCloseImage}
+        >
+          <img
+            src={selectedImage}
+            alt=""
+            className="max-w-[80vw] max-h-[80vh] object-contain rounded-xl shadow-lg"
+          />
+        </div>
+      )}
     </motion.div>
   );
 };
