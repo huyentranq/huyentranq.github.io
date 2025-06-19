@@ -23,36 +23,15 @@ const Home = () => {
   ];
 
   const skills = {
-    'Data Engineering': ['Apache Spark', 'Kafka', 'Airflow', 'Hadoop', 'Snowflake'],
-    'Programming': ['Python', 'SQL', 'Scala', 'Java', 'JavaScript'],
+    'Data Engineering': ['ELT/ETL','Apache Spark', 'Airflow', 'Dagster'],
+    'Tool & Database': ['Docker','Git','CI/CD','PostgreSQL', 'MySQL'],
+    'Programming': ['Python', 'SQL', 'R'],
     // 'Cloud Platforms': ['AWS', 'Google Cloud', 'Azure', 'Databricks'],
-    'Databases': ['PostgreSQL', 'MongoDB', 'Redis', 'Cassandra', 'BigQuery'],
+
     // 'Tools & DevOps': ['Docker', 'Kubernetes', 'Terraform', 'Git', 'Jenkins'],
   };
 
-  const projects = [
-    {
-      title: 'Movie Recommendation System',
-      description: 'AI-powered recommendation engine using collaborative filtering',
-      tech: ['Python', 'TensorFlow', 'PostgreSQL'],
-      image: 'https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=600',
-      slug: 'movie-recommendation-system',
-    },
-    {
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with real-time features',
-      tech: ['React', 'Node.js', 'MongoDB'],
-      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=600',
-      slug: 'ecommerce-platform',
-    },
-    {
-      title: 'Real-time Chat Application',
-      description: 'Scalable chat app with WebSocket integration',
-      tech: ['Vue.js', 'Socket.io', 'Redis'],
-      image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600',
-      slug: 'chat-application',
-    },
-  ];
+
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -86,7 +65,7 @@ const Home = () => {
 
       {/* ✅ Technical Skills */}
       <motion.section variants={fadeIn} custom={2} className="space-y-6">
-        <h2 className="text-2xl font-bold text-center">Technical Skills</h2>
+        <h2 className="text-xl font-bold text-center">Technical Skills</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {Object.entries(skills).map(([category, skillList], index) => (
             <motion.div

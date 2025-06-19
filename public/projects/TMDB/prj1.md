@@ -11,7 +11,7 @@ The project focuses on designing a full-fledged ELT pipeline, starting from data
 
 ### 1.Streamlit Interface
 
-![Streamlit UI](/huyentrang.github.io/projects/TMDB/images/output.jpg)
+![Streamlit UI](/projects/TMDB/images/output.jpg)
 
 
 
