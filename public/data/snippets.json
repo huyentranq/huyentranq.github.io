@@ -1,0 +1,241 @@
+[
+{
+  "id": "architecture",
+  "category": "spark",
+  "title": "Spark Architecture",
+  "description": "Kiến trúc tổng quan của Apache Spark, bao gồm Driver, Executor, DAG Scheduler và Cluster Manager.",
+  "details": [
+        {
+      "type": "image",
+      "src": "/images/spark/architecture.png",
+      "alt": "Kiến trúc tổng thể Spark"
+    },
+    {
+      "type": "text",
+      "content": "Apache Spark là một framework xử lý dữ liệu phân tán mạnh mẽ, được thiết kế để xử lý lượng lớn dữ liệu một cách nhanh chóng và hiệu quả. Kiến trúc của Spark bao gồm các thành phần chính sau:"
+    },
+    {
+      "type": "text",
+      "content": "Apache Spark sử dụng kiến trúc master-slave, trong đó:\n- **Driver Program**: điều khiển toàn bộ tiến trình, tạo `SparkContext`, gửi mã chương trình và giám sát tiến độ.\n- **Cluster Manager**: quản lý tài nguyên (RAM, CPU) giữa các node và phân bổ cho các Executor.\n- **Executors**: chạy trên Worker Node, thực thi các task và lưu trữ dữ liệu trung gian.\n- **DAG Scheduler & Task Scheduler**: DAG Scheduler chia nhỏ job thành các stage, Task Scheduler phân chia thành task và gửi tới các Executor thực thi song song."
+    },
+    {
+      "type": "text",
+      "content": "### 🔧 Kiến trúc thực thi nội bộ trong Apache Spark:\n1. **Driver Program**: Điểm khởi đầu của ứng dụng, tạo `SparkSession`, xây dựng RDD, gửi Action (như `count()`) để kích hoạt job.\n2. **SparkContext**: Giao tiếp giữa Driver và các thành phần bên dưới, gửi DAG đến DAG Scheduler.\n3. **DAG Scheduler**: Phân tích DAG, chia thành stage, gửi đến Task Scheduler.\n4. **Task Scheduler**: Chia nhỏ stage thành các task theo partition và gửi đến Cluster Manager.\n5. **Cluster Manager**: (YARN, Mesos, Kubernetes...) quản lý tài nguyên, phân bổ executor trên các node.\n6. **Executors**: Chạy task thực tế, lưu dữ liệu trung gian và trả kết quả về cho Driver."
+    },
+    {
+      "type": "text",
+      "content": "**Luồng dữ liệu tổng quát:**\nDriver → SparkContext → DAG Scheduler → Task Scheduler → Cluster Manager → Executor → Kết quả\n\n- Việc thực thi được bắt đầu **chỉ khi gặp Action**, nhờ vào cơ chế **Lazy Evaluation**.\n- DAG giúp xác định chính xác các phép biến đổi và tối ưu hóa việc thực thi song song."
+    },
+    {
+      "type": "code",
+      "content": "SparkContext -> DAG Scheduler -> Task Scheduler -> Cluster Manager -> Executors"
+    }
+
+  ]
+}
+,
+{
+  "id": "concepts",
+  "category": "spark",
+  "title": "Spark Core Concepts",
+  "description": "Tổng hợp các khái niệm cơ bản và quan trọng trong Spark.",
+  "details": [
+    {
+      "type": "text",
+      "content": "- **RDD (Resilient Distributed Dataset)**: Cấu trúc dữ liệu phân tán, bất biến và hỗ trợ thao tác song song. Cho phép lập trình phân tán trực tiếp, nhưng không tối ưu bằng DataFrame.\n\n- **DataFrame**: Tập dữ liệu dạng bảng có schema. Dễ dùng, hỗ trợ API như SQL và được tối ưu bởi Catalyst optimizer. Thường dùng thay RDD để xử lý dữ liệu hiệu quả hơn.\n\n- **Dataset** (Scala/Java): Kết hợp ưu điểm của RDD (type safety) và DataFrame (tối ưu hóa). Không có trong PySpark.\n\n- **Transformation**: Các phép biến đổi lazy (không thực thi ngay), như `filter`, `map`, `select`, `groupBy`. Chỉ tạo DAG để chờ action.\n\n- **Action**: Gọi thực thi DAG, ví dụ `show()`, `collect()`, `count()`, `take()`.\n\n- **Lazy Evaluation**: Spark trì hoãn tính toán cho đến khi có action, giúp tối ưu hóa pipeline xử lý.\n\n- **DAG (Directed Acyclic Graph)**: Spark tạo DAG thể hiện luồng phụ thuộc giữa các phép biến đổi. DAG Scheduler sẽ chia DAG thành các stage.\n\n- **Stage & Task**: Một job được chia thành nhiều stage (tập hợp task). Mỗi task xử lý 1 partition dữ liệu. Các task được phân phối song song đến Executor.\n\n- **SparkSession & SparkContext**: `SparkSession` là entry point hiện đại cho mọi thao tác Spark (DataFrame, SQL...). `SparkContext` là nền tảng cũ dùng cho RDD.\n\n- **Cluster Manager**: Thành phần quản lý tài nguyên của cluster. Spark có thể chạy trên Standalone, YARN, Mesos hoặc Kubernetes."
+    }
+  ]
+}
+,
+  {
+    "id": "filter",
+    "category": "pyspark",
+    "title": "Filter DataFrame",
+    "description": "Lọc dữ liệu theo điều kiện logic trong PySpark.",
+    "details": [
+      {
+        "type": "code",
+        "content": "df.filter(col('Item_Fat_Content') == 'Regular').show()"
+      },
+      {
+        "type": "code",
+        "content": "df.filter((col('Item_Type') == 'Soft Drinks') & (col('Item_Weight') < 10)).show()"
+      },
+      {
+        "type": "code",
+        "content": "df.filter((col('Outlet_Size').isNull()) & (col('Outlet_Location_Type').isin('Tier 1', 'Tier 2'))).show()"
+      }
+    ]
+  },
+  {
+    "id": "udf",
+    "category": "pyspark",
+    "title": "User Defined Functions (UDF)",
+    "description": "Tạo và sử dụng hàm tùy chỉnh trong PySpark.",
+    "details": [
+      {
+        "type": "text",
+        "content": "Khi không thể xử lý logic bằng hàm có sẵn, bạn có thể định nghĩa hàm riêng bằng UDF."
+      },
+      {
+        "type": "code",
+        "content": "from pyspark.sql.functions import udf\nfrom pyspark.sql.types import StringType\n\nto_upper = udf(lambda x: x.upper(), StringType())\ndf.withColumn(\"upper_col\", to_upper(col(\"col_name\"))).show()"
+      }
+    ]
+  },
+  {
+    "id": "select",
+    "category": "pyspark",
+    "title": "Select & Show",
+    "description": "Chọn cột và hiển thị dữ liệu trong PySpark DataFrame.",
+    "details": [
+      {
+        "type": "code",
+        "content": "df.select('Item_Weight', 'Item_MRP').show()"
+      },
+      {
+        "type": "code",
+        "content": "df.select(col('Item_Weight'), col('Item_MRP')).show()"
+      },
+      {
+        "type": "code",
+        "content": "df.selectExpr('Item_Weight * Item_MRP as Total').show()"
+      }
+    ]
+  },
+{
+  "id": "withcolumn",
+  "category": "pyspark",
+  "title": "WithColumn & Rename",
+  "description": "Thêm cột mới hoặc đổi tên cột trong PySpark DataFrame.",
+  "details": [
+    {
+      "type": "code",
+      "content": "// Đổi tên cột 'Item_Weight' thành 'Item_Wt'\ndf.withColumnRenamed('Item_Weight','Item_Wt').show()"
+    },
+    {
+      "type": "code",
+      "content": "// Thêm cột mới 'multiply' là tích của hai cột 'Item_Weight' và 'Item_MRP'\ndf.withColumn('multiply', col('Item_Weight') * col('Item_MRP')).show()"
+    },
+    {
+      "type": "code",
+      "content": "// Thêm cột 'flag' có giá trị mặc định là chuỗi 'new'\ndf.withColumn('flag', lit('new')).show()"
+    },
+    {
+      "type": "code",
+      "content": "// Thay thế giá trị trong cột 'Item_Fat_Content':\n// 'Regular' -> 'Reg', 'Low Fat' -> 'Lf'\ndf = df.withColumn('Item_Fat_Content', regexp_replace(col('Item_Fat_Content'), 'Regular', 'Reg'))\n         .withColumn('Item_Fat_Content', regexp_replace(col('Item_Fat_Content'), 'Low Fat', 'Lf'))"
+    }
+  ]
+}
+,
+  {
+    "id": "groupby",
+    "category": "pyspark",
+    "title": "GroupBy & Aggregation",
+    "description": "Sử dụng groupBy và các hàm tổng hợp trong PySpark.",
+    "details": [
+      {
+        "type": "code",
+        "content": "df.groupBy(\"column\").agg(count(\"*\"), sum(\"value\")).show()"
+      },
+      {
+        "type": "code",
+        "content": "df.groupBy(\"column\").agg(avg(\"value\"), min(\"value\"), max(\"value\")).show()"
+      },
+      {
+        "type": "code",
+        "content": "df.groupBy(\"column\").agg(collect_list(\"value\"), collect_set(\"value\")).show()"
+      },
+      {
+        "type": "image",
+        "src": "/images/spark-groupby.png",
+        "alt": "GroupBy trong PySpark"
+      }
+    ]
+  },
+ {
+  "id": "join",
+  "category": "pyspark",
+  "title": "Join DataFrames",
+  "description": "Kết hợp hai DataFrame bằng các loại join khác nhau trong PySpark.",
+  "details": [
+    {
+      "type": "text",
+      "content": "PySpark hỗ trợ nhiều loại `join` như:\n\n- **inner**: Chỉ giữ lại các dòng có khóa trùng khớp ở cả hai DataFrame.\n- **left** (left outer): Giữ lại tất cả dòng của DataFrame bên trái, kết hợp dữ liệu từ bên phải nếu có.\n- **right** (right outer): Tương tự như left, nhưng giữ lại toàn bộ dòng từ DataFrame bên phải.\n- **outer** (full outer): Giữ lại tất cả dòng từ cả hai bảng, phần không khớp sẽ có giá trị `null`.\n- **left_semi**: Giữ lại các dòng từ DataFrame bên trái mà có khóa khớp với bên phải, nhưng **không** lấy cột từ bên phải.\n- **left_anti**: Giữ lại các dòng từ bên trái mà **không** có khóa khớp với bên phải."
+    },
+    {
+      "type": "code",
+      "content": "df1.join(df2, df1.id == df2.id, 'inner').show()  # inner join"
+    },
+    {
+      "type": "code",
+      "content": "df1.join(df2, df1.id == df2.id, 'left').show()  # left outer join"
+    },
+    {
+      "type": "code",
+      "content": "df1.join(df2, df1.id == df2.id, 'right').show()  # right outer join"
+    },
+    {
+      "type": "code",
+      "content": "df1.join(df2, df1.id == df2.id, 'outer').show()  # full outer join"
+    },
+    {
+      "type": "code",
+      "content": "df1.join(df2, df1.id == df2.id, 'left_semi').show()  # chỉ lấy cột từ df1"
+    },
+    {
+      "type": "code",
+      "content": "df1.join(df2, df1.id == df2.id, 'left_anti').show()  # dòng không khớp từ df1"
+    },
+    {
+      "type": "text",
+      "content": "**Lưu ý:** Cột `id` phải có cùng tên hoặc cần được tham chiếu rõ ràng (`df1.id == df2.id`). Trong trường hợp cột bị trùng tên, nên dùng `.alias()` để tránh xung đột cột sau khi join."
+    }
+  ]
+}
+,
+  {
+    "id": "drop",
+    "category": "pyspark",
+    "title": "Drop & Remove Duplicates",
+    "description": "Xóa cột và loại bỏ bản ghi trùng lặp trong DataFrame.",
+    "details": [
+      {
+        "type": "code",
+        "content": "df.drop('Item_Visibility').show()"
+      },
+      {
+        "type": "code",
+        "content": "df.drop('Item_Visibility', 'Item_Type').show()"
+      },
+      {
+        "type": "code",
+        "content": "df.dropDuplicates().show()"
+      },
+      {
+        "type": "code",
+        "content": "df.drop_duplicates(subset=['Item_Type']).show()"
+      },
+      {
+        "type": "code",
+        "content": "df.distinct().show()"
+      }
+    ]
+  },
+  {
+    "id": "spark-sql",
+    "category": "pyspark",
+    "title": "Spark SQL",
+    "description": "Sử dụng SQL để truy vấn dữ liệu trong DataFrame.",
+    "details": [
+      {
+        "type": "text",
+        "content": "Spark SQL cho phép bạn đăng ký DataFrame như một bảng tạm thời và sử dụng SQL để truy vấn."
+      },
+      {
+        "type": "code",
+        "content": "df.createOrReplaceTempView(\"my_table\")\nspark.sql(\"SELECT * FROM my_table WHERE column = 'value'\").show()"
+      }
+    ]
+  }
+]

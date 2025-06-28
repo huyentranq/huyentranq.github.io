@@ -8,6 +8,7 @@ import ProjectDetail from './pages/ProjectDetail';
 import DocTech from './pages/DocTech';
 import Resume from './pages/Resume';
 import ScrollToTop from './components/ScrollToTop'; // ✅ đã import
+import SnippetDetail from './pages/SnippetDetail';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
               <Route path="/projects/:slug" element={<ProjectDetail />} />
               <Route path="/doc-tech" element={<DocTech />} />
               <Route path="/resume" element={<Resume />} />
+              <Route path="/snippet/:id" element={<SnippetDetail />} />
+
             </Routes>
           </main>
         </div>

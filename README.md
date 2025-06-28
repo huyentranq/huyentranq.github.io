@@ -19,6 +19,8 @@ A modern personal portfolio website built with React, TypeScript, and Tailwind C
 2. **Install dependencies**
    ```bash
    npm install
+   npm install react-router-dom
+   npm install react-markdown
    ```
 
 3. **Start development server**

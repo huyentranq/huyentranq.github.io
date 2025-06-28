@@ -17,14 +17,14 @@ const Home = () => {
     },
     {
       name: 'Gmail',
-      url: 'mailto:nguyenhuyentrangg457@gmail.com',
+      url: 'nguyenhuyentrangg457@gmail.com',
       icon: 'mail',
     },
   ];
 
   const skills = {
-    'Data Engineering': ['ELT/ETL','Apache Spark', 'Airflow', 'Dagster'],
-    'Tool & Database': ['Docker','Git','CI/CD','PostgreSQL', 'MySQL'],
+    'Data Engineering': ['ELT/ETL','Apache Spark','Kafka' ],
+    'Tool & Teach': ['Docker','Git','CI','Airflow', 'Dagster'],
     'Programming': ['Python', 'SQL', 'R'],
     // 'Cloud Platforms': ['AWS', 'Google Cloud', 'Azure', 'Databricks'],
 
@@ -59,7 +59,8 @@ const Home = () => {
           Huyen Trang
         </h1>
         <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mt-6">
-          Passionate Data Engineer with a knack for building scalable data solutions and a love for solving complex problems.
+          A Data Science student passionate about big data and machine learning.
+           I'm currently expanding my knowledge in modern data technologies
         </p>
       </motion.section>
 
