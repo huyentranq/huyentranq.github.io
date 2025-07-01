@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-
 
 interface SnippetDetail {
   type: 'text' | 'code' | 'image';
@@ -23,8 +21,21 @@ interface Snippet {
 const DocTech: React.FC = () => {
   const [snippets, setSnippets] = useState<Snippet[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [activeSparkTopic, setActiveSparkTopic] = useState<string | null>(null);
+  const [activeTopicId, setActiveTopicId] = useState<string | null>(null);
+
+  const categoryList = ['spark', 'kafka'];
+  const categoryMeta: Record<string, { title: string; description: string; image: string }> = {
+    spark: {
+      title: 'Spark',
+      description: 'Distributed computing and big data processing.',
+      image: '/images/spark/spark_im.png',
+    },
+    kafka: {
+      title: 'Kafka',
+      description: 'Stream processing and real-time data pipelines.',
+      image: '/images/kafka/kafka_im.png',
+    }
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -33,70 +44,50 @@ const DocTech: React.FC = () => {
       if (!Array.isArray(data)) {
         console.error('Dữ liệu snippets.json không phải là mảng:', data);
         return;
-    }
+      }
       setSnippets(data);
     };
     loadData();
   }, []);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
+  const renderDetailBlock = (detail: SnippetDetail, index: number) => {
+    switch (detail.type) {
+      case 'text':
+        return (
+          <ReactMarkdown
+            key={index}
+            className="prose prose-sm prose-invert text-gray-300 mb-4 max-w-none"
+          >
+            {detail.content || ''}
+          </ReactMarkdown>
+        );
+      case 'code':
+        return (
+          <pre
+            key={index}
+            className="bg-black text-green-200 p-3 text-sm rounded mb-4 overflow-x-auto whitespace-pre"
+          >
+            <code>{detail.content}</code>
+          </pre>
+        );
+      case 'image':
+        return (
+          <img
+            key={index}
+            src={detail.src}
+            alt={detail.alt || ''}
+            className="rounded shadow mb-4 max-w-full"
+          />
+        );
+      default:
+        return null;
+    }
   };
 
-  const handleCategoryChange = (category: string) => {
-    setActiveCategory(category);
-    setActiveSparkTopic(null);
-  };
-
-
-const renderDetailBlock = (detail: SnippetDetail, index: number) => {
-  switch (detail.type) {
-    case 'text':
-      return (
-        <ReactMarkdown
-          key={index}
-          className="prose prose-sm prose-invert text-gray-300 mb-4 max-w-none"
-        >
-          {detail.content || ''}
-        </ReactMarkdown>
-      );
-
-    case 'code':
-      return (
-        <pre
-          key={index}
-          className="bg-black text-green-200 p-3 text-sm rounded mb-4 overflow-x-auto whitespace-pre"
-        >
-          <code>{detail.content}</code>
-        </pre>
-      );
-
-    case 'image':
-      return (
-        <img
-          key={index}
-          src={detail.src}
-          alt={detail.alt || ''}
-          className="rounded shadow mb-4 max-w-full"
-        />
-      );
-
-    default:
-      return null;
-  }
-};
-
-
-  const filteredSnippets = snippets.filter((snippet) => {
-    const matchCategory = activeCategory === 'all' || snippet.category === activeCategory;
-    const matchSearch = snippet.title.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchCategory && matchSearch;
-  });
-
-  const sparkSnippets = snippets.filter((s) =>
-        ['spark', 'pyspark'].includes(s.category)
-    );
-  const selectedSpark = sparkSnippets.find((s) => s.id === activeSparkTopic);
+  const filteredSnippets = snippets.filter(
+    (snippet) => activeCategory === 'all' || snippet.category === activeCategory
+  );
+  const selectedTopic = snippets.find((s) => s.id === activeTopicId);
 
   return (
     <div className="p-6 space-y-6">
@@ -105,101 +96,119 @@ const renderDetailBlock = (detail: SnippetDetail, index: number) => {
         <p className="text-gray-400 text-sm">Trang tài liệu cá nhân của bạn</p>
       </motion.div>
 
-      {/* Search box */}
-      <div className="max-w-sm mx-auto relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-        <input
-          type="text"
-          placeholder="Tìm kiếm..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="pl-10 pr-3 py-2 border rounded-md w-full text-sm bg-white text-black"
-        />
-      </div>
-
-      {/* Category buttons */}
+      {/* Nút category luôn hiển thị */}
       <div className="flex justify-center gap-3">
-        {['all', 'javascript', 'python', 'java', 'spark'].map((category) => (
+        {['all', ...categoryList].map((category) => (
           <button
             key={category}
-            onClick={() => handleCategoryChange(category)}
+            onClick={() => {
+              setActiveCategory(category);
+              setActiveTopicId(null);
+            }}
             className={`px-4 py-1.5 rounded-md text-sm font-medium ${
               activeCategory === category
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
             }`}
           >
-            {category === 'all' ? 'Tất cả' : category}
+            {category === 'all'
+              ? 'Tất cả'
+              : category.charAt(0).toUpperCase() + category.slice(1)}
           </button>
         ))}
       </div>
 
-      {/* Spark mode layout */}
-      {activeCategory === 'spark' ? (
-        <div className="flex gap-6">
-          {/* Sidebar */}
-          <div className="w-1/4 border-r pr-4 space-y-2">
-            {sparkSnippets.map((topic) => (
-              <button
-                key={topic.id}
-                onClick={() => setActiveSparkTopic(topic.id)}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium ${
-                  activeSparkTopic === topic.id
-                    ? 'bg-blue-600 text-white'
-                    : 'hover:bg-gray-200 text-gray-700'
-                }`}
-              >
-                {topic.title}
-              </button>
-            ))}
+{activeCategory === 'all' && (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {categoryList.map((cat) => {
+      const meta = categoryMeta[cat];
+      return (
+        <div
+          key={cat}
+          className="flex flex-col md:flex-row bg-gray-800 rounded-lg overflow-hidden shadow group cursor-pointer transform transition hover:scale-[1.01]"
+          onClick={() => {
+            setActiveCategory(cat);
+            setActiveTopicId(null); // hoặc setActiveSparkTopic nếu dùng tên đó
+          }}
+        >
+          <img
+            src={meta.image}
+            alt={meta.title}
+            className="w-full md:w-1/3 h-20 object-cover"
+          />
+          <div className="p-3 text-white flex flex-col justify-center w-full md:w-2/3 bg-gray-900">
+            <h3 className="text-base font-semibold text-blue-400">{meta.title}</h3>
+            <p className="text-xs mt-1 text-gray-300">{meta.description}</p>
+            <span className="text-blue-400 text-xs mt-2 hover:underline">
+              Explore {meta.title} →
+            </span>
           </div>
+        </div>
+      );
+    })}
+  </div>
+)}
 
-          {/* Main content */}
+
+
+
+      {/* Nút quay lại */}
+      {activeCategory !== 'all' && (
+        <div className="text-left">
+          <button
+            className="text-blue-500 text-base hover:underline"
+            onClick={() => {
+              setActiveCategory('all');
+              setActiveTopicId(null);
+            }}
+          >
+            ← Quay lại
+          </button>
+        </div>
+      )}
+
+      {/* Layout detail cho các category */}
+      {activeCategory !== 'all' && (
+        <div className="flex gap-6">
+          <div className="w-1/4 border-r pr-4 space-y-2">
+            {snippets
+              .filter((s) => s.category === activeCategory)
+              .map((topic) => (
+                <button
+                  key={topic.id}
+                  onClick={() => setActiveTopicId(topic.id)}
+                  className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium ${
+                    activeTopicId === topic.id
+                      ? 'bg-blue-600 text-white'
+                      : 'hover:bg-gray-200 text-gray-700'
+                  }`}
+                >
+                  {topic.title}
+                </button>
+              ))}
+          </div>
           <div className="w-3/4">
-            {selectedSpark ? (
+            {selectedTopic ? (
               <motion.div
-                key={selectedSpark.id}
+                key={selectedTopic.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-gray-800 text-white p-4 rounded shadow"
               >
-                <h3 className="text-lg font-semibold mb-2">{selectedSpark.title}</h3>
-                <p className="text-sm mb-4 text-gray-300">{selectedSpark.description}</p>
-                {selectedSpark.details
-                  ? selectedSpark.details.map((detail, idx) => renderDetailBlock(detail, idx))
-                  : selectedSpark.code && (
+                <h3 className="text-lg font-semibold mb-2">{selectedTopic.title}</h3>
+                <p className="text-sm mb-4 text-gray-300">{selectedTopic.description}</p>
+                {selectedTopic.details
+                  ? selectedTopic.details.map((detail, idx) => renderDetailBlock(detail, idx))
+                  : selectedTopic.code && (
                       <pre className="bg-black text-green-200 p-3 text-sm rounded overflow-x-auto">
-                        <code>{selectedSpark.code}</code>
+                        <code>{selectedTopic.code}</code>
                       </pre>
                     )}
               </motion.div>
             ) : (
-              <p className="text-gray-400">Chọn một chủ đề Spark bên trái để xem nội dung.</p>
+              <p className="text-gray-400">Chọn một chủ đề bên trái để xem nội dung.</p>
             )}
           </div>
-        </div>
-      ) : (
-        // Normal viewer
-        <div className="space-y-4">
-          {filteredSnippets.length === 0 ? (
-            <p className="text-center text-gray-400">Không có đoạn mã phù hợp.</p>
-          ) : (
-            filteredSnippets.map((snippet, index) => (
-              <motion.div
-                key={index}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.05 }}
-                className="bg-gray-100 rounded-md p-4 shadow"
-              >
-                <h4 className="font-semibold text-gray-800">{snippet.title}</h4>
-                <p className="text-sm text-gray-500 mb-2">{snippet.description}</p>
-                <pre className="bg-gray-800 text-white p-2 text-sm rounded overflow-x-auto">
-                  <code>{snippet.code}</code>
-                </pre>
-              </motion.div>
-            ))
-          )}
         </div>
       )}
     </div>

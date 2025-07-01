@@ -17,7 +17,7 @@ const Home = () => {
     },
     {
       name: 'Gmail',
-      url: 'nguyenhuyentrangg457@gmail.com',
+      url: 'mailto:nguyenhuyentrangg457@gmail.com',
       icon: 'mail',
     },
   ];

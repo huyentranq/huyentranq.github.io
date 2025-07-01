@@ -48,14 +48,14 @@ const Resume = () => {
   };
 
   const competitions = [
-    { title: 'SCUDEM IX (International Challenge on Differential Equations Modeling)', rank: '2nd Place' },
-    { title: 'MCM/ICM 2025 (International Mathematical Contest in Modeling)', rank: 'Honorable Award' },
+    { title: 'SCUDEM IX - International Challenge on Differential Equations Modeling', rank: '2nd Place' },
+    { title: 'MCM/ICM 2025 - International Mathematical Contest in Modeling', rank: 'Honorable Award' },
     { title: 'MDS Datathon Challenge in Business', rank: 'Top 20' },
   ];
 
   const certificates = [
-    { title: 'Advanced SQL Certificate - Hackerank', issuer: 'Amazon Web Services' },
-    { title: 'Fundamental Data Engineer', issuer: 'Google Cloud' },
+    { title: 'Advanced SQL Certificate', issuer: 'HackerRank' },
+    { title: 'Fundamental Data Engineer', issuer: 'AIDE' },
   ];
 
   const containerVariants = {
@@ -86,38 +86,51 @@ const Resume = () => {
       initial="hidden"
       animate="visible"
     >
-      {/* Header */}
-      <motion.section variants={itemVariants} className="text-center space-y-4">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          Resume
-        </h1>
-        <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Data Engineer with 5+ years of experience building scalable data infrastructure and analytics platforms
-        </p>
-        <div className="flex justify-center space-x-3">
-          <a
-            href="https://drive.google.com/file/d/your-resume-file-id/view"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200 text-sm"
-          >
-            <ExternalLink className="mr-2 w-4 h-4" />
-            View PDF
-          </a>
-          <a
-            href="https://drive.google.com/uc?export=download&id=your-resume-file-id"
-            className="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-medium transition-colors duration-200 text-sm"
-          >
-            <Download className="mr-2 w-4 h-4" />
-            Download PDF
-          </a>
-        </div>
-      </motion.section>
+    <motion.section variants={itemVariants} className="text-center space-y-4">
+      {/* Avatar */}
+      <motion.div className="flex justify-center">
+        <img
+          src="https://i.pravatar.cc/150?img=68"
+          alt="Profile"
+          className="rounded-full w-36 h-36 object-cover border-4 border-white shadow-md -mb-2"
+        />
+      </motion.div>
+
+      {/* Title */}
+      <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Resume
+      </h1>
+
+      <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        {/* Nếu cần thêm mô tả ngắn ở đây */}
+      </p>
+
+      {/* Action buttons */}
+      <div className="flex justify-center space-x-3">
+        <a
+          href="https://drive.google.com/file/d/your-resume-file-id/view"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200 text-sm"
+        >
+          <ExternalLink className="mr-2 w-4 h-4" />
+          View PDF
+        </a>
+        <a
+          href="https://drive.google.com/uc?export=download&id=your-resume-file-id"
+          className="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-medium transition-colors duration-200 text-sm"
+        >
+          <Download className="mr-2 w-4 h-4" />
+          Download PDF
+        </a>
+      </div>
+    </motion.section>
+
 
       {/* Contact Info */}
       <motion.section variants={itemVariants} className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
         <h2 className="text-xl font-bold mb-4 text-center">Contact Information</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
           <div className="flex items-center space-x-2">
             <Mail className="w-4 h-4 text-blue-500" />
             <span className="text-sm text-gray-700 dark:text-gray-300">nguyenhuyentrangg457@gmail.com</span>
@@ -130,10 +143,7 @@ const Resume = () => {
             <MapPin className="w-4 h-4 text-red-500" />
             <span className="text-sm text-gray-700 dark:text-gray-300">Thu Duc - Ho Chi Minh</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <Linkedin className="w-4 h-4 text-blue-600" />
-            <span className="text-sm text-gray-700 dark:text-gray-300">linkedin.com/in/johndoe</span>
-          </div>
+
         </div>
       </motion.section>
 {/* Education + Competitions + Certificates */}
