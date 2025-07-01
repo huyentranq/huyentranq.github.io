@@ -49,7 +49,7 @@
 ,
   {
     "id": "filter",
-    "category": "pyspark",
+    "category": "spark",
     "title": "Filter DataFrame",
     "description": "Lọc dữ liệu theo điều kiện logic trong PySpark.",
     "details": [
@@ -69,7 +69,7 @@
   },
   {
     "id": "udf",
-    "category": "pyspark",
+    "category": "spark",
     "title": "User Defined Functions (UDF)",
     "description": "Tạo và sử dụng hàm tùy chỉnh trong PySpark.",
     "details": [
@@ -85,7 +85,7 @@
   },
   {
     "id": "select",
-    "category": "pyspark",
+    "category": "spark",
     "title": "Select & Show",
     "description": "Chọn cột và hiển thị dữ liệu trong PySpark DataFrame.",
     "details": [
@@ -103,59 +103,9 @@
       }
     ]
   },
-{
-  "id": "withcolumn",
-  "category": "pyspark",
-  "title": "WithColumn & Rename",
-  "description": "Thêm cột mới hoặc đổi tên cột trong PySpark DataFrame.",
-  "details": [
-    {
-      "type": "code",
-      "content": "// Đổi tên cột 'Item_Weight' thành 'Item_Wt'\ndf.withColumnRenamed('Item_Weight','Item_Wt').show()"
-    },
-    {
-      "type": "code",
-      "content": "// Thêm cột mới 'multiply' là tích của hai cột 'Item_Weight' và 'Item_MRP'\ndf.withColumn('multiply', col('Item_Weight') * col('Item_MRP')).show()"
-    },
-    {
-      "type": "code",
-      "content": "// Thêm cột 'flag' có giá trị mặc định là chuỗi 'new'\ndf.withColumn('flag', lit('new')).show()"
-    },
-    {
-      "type": "code",
-      "content": "// Thay thế giá trị trong cột 'Item_Fat_Content':\n// 'Regular' -> 'Reg', 'Low Fat' -> 'Lf'\ndf = df.withColumn('Item_Fat_Content', regexp_replace(col('Item_Fat_Content'), 'Regular', 'Reg'))\n         .withColumn('Item_Fat_Content', regexp_replace(col('Item_Fat_Content'), 'Low Fat', 'Lf'))"
-    }
-  ]
-}
-,
   {
-    "id": "groupby",
-    "category": "pyspark",
-    "title": "GroupBy & Aggregation",
-    "description": "Sử dụng groupBy và các hàm tổng hợp trong PySpark.",
-    "details": [
-      {
-        "type": "code",
-        "content": "df.groupBy(\"column\").agg(count(\"*\"), sum(\"value\")).show()"
-      },
-      {
-        "type": "code",
-        "content": "df.groupBy(\"column\").agg(avg(\"value\"), min(\"value\"), max(\"value\")).show()"
-      },
-      {
-        "type": "code",
-        "content": "df.groupBy(\"column\").agg(collect_list(\"value\"), collect_set(\"value\")).show()"
-      },
-      {
-        "type": "image",
-        "src": "/images/spark-groupby.png",
-        "alt": "GroupBy trong PySpark"
-      }
-    ]
-  },
- {
   "id": "join",
-  "category": "pyspark",
+  "category": "spark",
   "title": "Join DataFrames",
   "description": "Kết hợp hai DataFrame bằng các loại join khác nhau trong PySpark.",
   "details": [
@@ -192,11 +142,61 @@
       "content": "**Lưu ý:** Cột `id` phải có cùng tên hoặc cần được tham chiếu rõ ràng (`df1.id == df2.id`). Trong trường hợp cột bị trùng tên, nên dùng `.alias()` để tránh xung đột cột sau khi join."
     }
   ]
+},
+{
+  "id": "withcolumn",
+  "category": "spark",
+  "title": "WithColumn & Rename",
+  "description": "Thêm cột mới hoặc đổi tên cột trong PySpark DataFrame.",
+  "details": [
+    {
+      "type": "code",
+      "content": "// Đổi tên cột 'Item_Weight' thành 'Item_Wt'\ndf.withColumnRenamed('Item_Weight','Item_Wt').show()"
+    },
+    {
+      "type": "code",
+      "content": "// Thêm cột mới 'multiply' là tích của hai cột 'Item_Weight' và 'Item_MRP'\ndf.withColumn('multiply', col('Item_Weight') * col('Item_MRP')).show()"
+    },
+    {
+      "type": "code",
+      "content": "// Thêm cột 'flag' có giá trị mặc định là chuỗi 'new'\ndf.withColumn('flag', lit('new')).show()"
+    },
+    {
+      "type": "code",
+      "content": "// Thay thế giá trị trong cột 'Item_Fat_Content':\n// 'Regular' -> 'Reg', 'Low Fat' -> 'Lf'\ndf = df.withColumn('Item_Fat_Content', regexp_replace(col('Item_Fat_Content'), 'Regular', 'Reg'))\n         .withColumn('Item_Fat_Content', regexp_replace(col('Item_Fat_Content'), 'Low Fat', 'Lf'))"
+    }
+  ]
 }
 ,
   {
+    "id": "groupby",
+    "category": "spark",
+    "title": "GroupBy & Aggregation",
+    "description": "Sử dụng groupBy và các hàm tổng hợp trong PySpark.",
+    "details": [
+      {
+        "type": "code",
+        "content": "df.groupBy(\"column\").agg(count(\"*\"), sum(\"value\")).show()"
+      },
+      {
+        "type": "code",
+        "content": "df.groupBy(\"column\").agg(avg(\"value\"), min(\"value\"), max(\"value\")).show()"
+      },
+      {
+        "type": "code",
+        "content": "df.groupBy(\"column\").agg(collect_list(\"value\"), collect_set(\"value\")).show()"
+      },
+      {
+        "type": "image",
+        "src": "/images/spark-groupby.png",
+        "alt": "GroupBy trong PySpark"
+      }
+    ]
+  },
+ 
+  {
     "id": "drop",
-    "category": "pyspark",
+    "category": "spark",
     "title": "Drop & Remove Duplicates",
     "description": "Xóa cột và loại bỏ bản ghi trùng lặp trong DataFrame.",
     "details": [
@@ -224,7 +224,7 @@
   },
   {
     "id": "spark-sql",
-    "category": "pyspark",
+    "category": "spark",
     "title": "Spark SQL",
     "description": "Sử dụng SQL để truy vấn dữ liệu trong DataFrame.",
     "details": [
@@ -237,5 +237,222 @@
         "content": "df.createOrReplaceTempView(\"my_table\")\nspark.sql(\"SELECT * FROM my_table WHERE column = 'value'\").show()"
       }
     ]
+  },
+
+{
+  "id": "kafka-intro",
+  "category": "kafka",
+  "title": "Kafka Architecture",
+  "description": "Tổng quan kiến trúc Kafka và các thành phần cốt lõi.",
+  "details": [
+    {
+      "type": "text",
+      "content": "Kafka là hệ thống **pub-sub** (publisher-subscriber) phân tán, giúp truyền tải dữ liệu theo thời gian thực giữa các hệ thống. Dưới đây là các thành phần chính:\n\n- **Cluster**: Gồm nhiều **broker** – là các máy chủ xử lý song song và phân phối dữ liệu.\n- **Broker**: Lưu trữ và xử lý các **partition** của các **topic**. Mỗi broker có thể lưu nhiều partition.\n- **Topic**: Kênh logic chứa các message cùng loại (order, user, log...). Mỗi topic chia nhỏ thành nhiều **partition**.\n- **Partition**: Một phần của topic. Mỗi partition chỉ được xử lý bởi đúng 1 consumer trong 1 group tại một thời điểm.\n- **Offset**: Vị trí (index) xác định thứ tự của mỗi message trong partition.\n- **Message**: Đơn vị dữ liệu nhỏ nhất gồm key, value, offset, timestamp.\n- **Producer**: Gửi dữ liệu vào topic. Kafka tự động xác định partition hoặc sử dụng key để phân chia.\n- **Consumer**: Đăng ký lắng nghe topic, đọc dữ liệu từ partition tương ứng trong broker.\n- **ZooKeeper / KRaft**: Dùng để quản lý metadata cluster, giám sát broker, chọn leader nếu broker chết.\n- **Replication**: Mỗi partition có 1 bản chính (**leader replica**) và nhiều bản sao (**follower replica**) để đảm bảo tính sẵn sàng."
+    },
+    {
+      "type": "text",
+      "content": "**Phân bổ dữ liệu:**\nMỗi partition sẽ có:\n- 1 **Leader Replica**: Producer sẽ ghi và Consumer sẽ đọc từ đây.\n- n **Follower Replicas**: Bản sao nằm trên các broker khác, chỉ dùng để dự phòng.\n\n**Ví dụ phân chia dữ liệu theo partition:**\n- Partition 0 → User 1 đến 4\n- Partition 1 → User 5 đến 10\n\n**Note**: 1 job Spark có thể **đóng vai trò consumer**, đọc dữ liệu từ Kafka và lưu vào PostgreSQL hoặc Data Lake."
+    },
+    {
+      "type": "image",
+      "src": "/images/kafka/airchitechture.png",
+      "alt": "Kiến trúc tổng thể Kafka"
+    }
+  ]
+},
+{
+  "id": "kafka-producer",
+  "category": "kafka",
+  "title": "Kafka Producer",
+  "description": "Chi tiết cách tạo Kafka Producer, tối ưu hiệu suất và đảm bảo độ tin cậy khi gửi dữ liệu.",
+  "details": [
+    {
+      "type": "text",
+      "content": "**Kafka Producer** là thành phần chịu trách nhiệm gửi dữ liệu (message) vào một Kafka Topic.\nProducer gửi dữ liệu tuần tự hoặc song song, có thể tùy chỉnh partition, batch, key để kiểm soát hiệu năng và tính đúng đắn."
+    },
+    {
+      "type": "code",
+      "content": "from kafka import KafkaProducer\nproducer = KafkaProducer(bootstrap_servers='localhost:9092')\nproducer.send('my-topic', key=b'user-1', value=b'Hello Kafka!')\nproducer.flush()"
+    },
+    {
+      "type": "text",
+      "content": "###  **Các yếu tố quan trọng khi gửi dữ liệu**:\n\n- `key`: Giúp **phân phối message** vào cùng partition nếu cần giữ thứ tự.\n- `value`: Dữ liệu thực tế (string, JSON, binary...).\n- `partition`: Có thể chỉ định thủ công, mặc định Kafka sẽ phân phối tự động."
+    },
+    {
+      "type": "text",
+      "content": "###  **flush()**\n- Gửi toàn bộ message đang nằm trong bộ nhớ đệm xuống Kafka broker.\n- Nếu không gọi `flush()` hoặc `producer.close()`, chương trình có thể kết thúc mà chưa gửi hết dữ liệu."
+    },
+    {
+      "type": "text",
+      "content": "###  **Callback & Poll**\n- **Callback**: Hàm xử lý kết quả gửi (thành công/thất bại).\n- **poll()**: Bắt buộc để Kafka xử lý callback (với `confluent-kafka`).\n\n```python\nproducer.send('my-topic', b'data', callback=handle_callback)\nproducer.flush()\n```"
+    },
+    {
+      "type": "text",
+      "content": "###  **Partitioning theo Key**\n```python\nproducer.send('my-topic', key=b'account_001', value=b'transaction1')\n```\n➡️ Tất cả message có cùng key sẽ vào **cùng một partition**, đảm bảo thứ tự (ordering)."
+    }
+  ]
+}
+,
+{
+  "id": "kafka-consumer",
+  "category": "kafka",
+  "title": "Kafka Consumer",
+  "description": "Cách hoạt động của consumer, group, offset và kỹ thuật đảm bảo xử lý an toàn.",
+  "details": [
+    {
+      "type": "text",
+      "content": "**Kafka Consumer** là thành phần chịu trách nhiệm **đọc dữ liệu từ Kafka topic**. Nó hoạt động dựa trên cơ chế group để chia tải và quản lý tiến trình xử lý."
+    },
+    {
+      "type": "code",
+      "content": "from kafka import KafkaConsumer\nconsumer = KafkaConsumer(\n    'my-topic',\n    bootstrap_servers='localhost:9092',\n    group_id='etl-group',\n    auto_offset_reset='earliest',\n    enable_auto_commit=True\n)\nfor msg in consumer:\n    print(msg.value.decode())"
+    },
+    {
+      "type": "text",
+      "content": "###  **Consumer Group**\n- Các consumer cùng `group.id` sẽ chia nhau các partition để xử lý song song.\n- Mỗi partition **chỉ được đọc bởi 1 consumer trong group tại một thời điểm**.\n- Thay đổi số lượng consumer sẽ gây ra **rebalance**."
+    },
+    {
+      "type": "text",
+      "content": "###  **Offset – Quản lý vị trí đọc**\n- Kafka lưu **offset** để biết consumer đã đọc tới đâu trong partition.\n- 2 cách commit offset:\n  - `enable_auto_commit=True`: Kafka tự commit sau mỗi `poll()`.\n  - Manual commit: Khi bạn xử lý xong mới `commit()` (an toàn hơn).\n\n```python\nconsumer.commit()  # Khi xử lý thành công\n```"
+    },
+    {
+      "type": "text",
+      "content": "###  **Rebalance – Phân phối lại partition**\n- Xảy ra khi consumer join/leave group.\n- Kafka tự động phân phối lại partition → tạm thời ngắt xử lý.\n- Có thể hook vào `on_partitions_revoked` và `on_partitions_assigned` để xử lý khi rebalance xảy ra."
+    },
+    {
+      "type": "text",
+      "content": "###  **Manual offset + Exactly-once**\n- Kết hợp `enable_auto_commit=False` và commit thủ công **sau khi xử lý xong** giúp tránh mất mát/thừa dữ liệu.\n- Kỹ thuật này thường dùng với Spark, Flink, hoặc hệ thống lưu trữ chuẩn như PostgreSQL, S3..."
+    }
+  ]
+},
+{
+  "id": "kafka-consumer-advanced",
+  "category": "kafka",
+  "title": "Rebalance & Callback",
+  "description": "Xử lý rebalance bằng callback và đảm bảo đúng logic tiêu thụ dữ liệu Kafka.",
+  "details": [
+    {
+      "type": "text",
+      "content": "###  Rebalance là gì?\nRebalance xảy ra khi có **consumer mới tham gia hoặc rời nhóm**, Kafka sẽ phân phối lại các partition. \nTrong quá trình này, một số partition tạm thời không được xử lý → nếu không quản lý offset kỹ, có thể gây:\n- Mất dữ liệu (chưa xử lý xong mà bị mất quyền).\n- Xử lý trùng (nếu chưa commit offset)."
+    },
+    {
+      "type": "text",
+      "content": "###  Cách xử lý bằng callback: `on_partitions_revoked` và `on_partitions_assigned`\nDùng callback để kiểm soát luồng xử lý khi partition bị lấy hoặc được gán."
+    },
+    {
+      "type": "code",
+      "content": "from kafka import KafkaConsumer\nfrom kafka.consumer import TopicPartition\n\nclass RebalanceHandler:\n    def __init__(self, consumer):\n        self.consumer = consumer\n\n    def on_partitions_revoked(self, revoked):\n        print(f\"Partition bị thu hồi: {revoked}\")\n        # Commit offset thủ công trước khi mất quyền xử lý\n        self.consumer.commit()\n\n    def on_partitions_assigned(self, assigned):\n        print(f\"Partition mới được gán: {assigned}\")"
+    },
+    {
+      "type": "text",
+      "content": "###  Tích hợp callback vào KafkaConsumer"
+    },
+    {
+      "type": "code",
+      "content": "consumer = KafkaConsumer(\n    'books',\n    bootstrap_servers='localhost:9092',\n    group_id='book-consumer-group',\n    enable_auto_commit=False,  # Tắt tự commit\n    auto_offset_reset='earliest'\n)\n\nhandler = RebalanceHandler(consumer)\n\nconsumer.subscribe(['books'],\n    on_assign=handler.on_partitions_assigned,\n    on_revoke=handler.on_partitions_revoked\n)"
+    }
+
+  ]
   }
+,
+{
+  "id": "kafka-cli",
+  "category": "kafka",
+  "title": "Kafka CLI Commands",
+  "description": "Tạo topic, gửi dữ liệu bằng producer và đọc dữ liệu bằng consumer trong Kafka CLI.",
+  "details": [
+    {
+      "type": "text",
+      "content": "###  Tạo Topic Kafka\nLệnh tạo topic mới với 1 partition và replication factor là 1:\n"
+    },
+    {
+      "type": "code",
+      "content": "/usr/bin/kafka-topics --create \\\n  --topic books \\\n  --bootstrap-server localhost:9092 \\\n  --partitions 1 \\\n  --replication-factor 1"
+    },
+    {
+      "type": "text",
+      "content": " **Xem danh sách topic đã tạo:**"
+    },
+    {
+      "type": "code",
+      "content": "/usr/bin/kafka-topics --list --bootstrap-server localhost:9092"
+    },
+    {
+      "type": "text",
+      "content": "###  Gửi Message với Kafka Producer"
+    },
+    {
+      "type": "text",
+      "content": "####  Gửi dữ liệu đơn giản:"
+    },
+    {
+      "type": "code",
+      "content": "/usr/bin/kafka-console-producer \\\n  --topic test_topic \\\n  --bootstrap-server localhost:9092"
+    },
+    {
+      "type": "text",
+      "content": " Gõ nội dung → nhấn Enter để gửi, Ctrl+C để dừng session."
+    },
+    {
+      "type": "text",
+      "content": "####  Gửi message có key:"
+    },
+    {
+      "type": "code",
+      "content": "kafka-console-producer \\\n  --bootstrap-server localhost:9092 \\\n  --topic books \\\n  --property parse.key=true \\\n  --property key.separator=:"
+    },
+    {
+      "type": "text",
+      "content": " Ví dụ nhập:\n```\nuser1:Harry Potter\nuser2:Sherlock Holmes\n```\nKafka sẽ sử dụng `user1`, `user2` làm key → giúp message cùng key đi vào cùng một partition."
+    },
+    {
+      "type": "text",
+      "content": "###  Đọc dữ liệu với Kafka Consumer"
+    },
+    {
+      "type": "text",
+      "content": "####  Hiển thị đầy đủ thông tin:"
+    },
+    {
+      "type": "code",
+      "content": "kafka-console-consumer \\\n  --bootstrap-server localhost:9092 \\\n  --topic bank_transactions \\\n  --from-beginning \\\n  --formatter kafka.tools.DefaultMessageFormatter \\\n  --property print.timestamp=true \\\n  --property print.key=true \\\n  --property print.value=true"
+    },
+    {
+      "type": "text",
+      "content": " Giúp in ra: thời gian gửi, key, value của từng message."
+    },
+    {
+      "type": "text",
+      "content": "####  Chạy consumer trong container Docker:"
+    },
+    {
+      "type": "code",
+      "content": "docker exec -it kafka bash \\\n  /usr/bin/kafka-console-consumer \\\n  --topic bank_transactions \\\n  --from-beginning \\\n  --bootstrap-server localhost:9092"
+    },
+    {
+      "type": "text",
+      "content": "###  Các lệnh hữu ích khác"
+    },
+    {
+      "type": "text",
+      "content": "####  Xoá topic:"
+    },
+    {
+      "type": "code",
+      "content": "/usr/bin/kafka-topics --delete \\\n  --topic books \\\n  --bootstrap-server localhost:9092"
+    },
+    {
+      "type": "text",
+      "content": "#### Mô tả thông tin một topic:"
+    },
+    {
+      "type": "code",
+      "content": "/usr/bin/kafka-topics --describe \\\n  --topic books \\\n  --bootstrap-server localhost:9092"
+    }
+  ]
+}
+
+
+
 ]
+
