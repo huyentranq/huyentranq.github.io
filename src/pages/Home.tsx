@@ -47,9 +47,9 @@ const Home = () => {
       {/* Avatar */}
       <motion.div className="flex justify-center">
         <img
-          src="https://i.pravatar.cc/150?img=68"
+          src="/images/avt2.jpg"
           alt="Profile"
-          className="rounded-full w-36 h-36 object-cover border-4 border-white shadow-md"
+          className="rounded-full w-48 h-48 object-cover border-4 border-white shadow-md rotate-6"
         />
       </motion.div>
 
