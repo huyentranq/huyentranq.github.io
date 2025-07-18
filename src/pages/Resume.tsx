@@ -109,7 +109,7 @@ const Resume = () => {
       {/* Action buttons */}
       <div className="flex justify-center space-x-3">
         <a
-          href="https://drive.google.com/file/d/your-resume-file-id/view"
+          href="https://drive.google.com/file/d/1Z1GjN-EmuMFC_CTAOoPyTPJ1uyd78Yxa/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200 text-sm"
