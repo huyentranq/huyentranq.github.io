@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Download, ExternalLink, Mail, Phone, MapPin, Linkedin, Github, Trophy, Award
+  Download, ExternalLink, Mail, Phone, MapPin, Trophy, Award
 } from 'lucide-react';
 
 const Resume = () => {
@@ -42,9 +42,7 @@ const Resume = () => {
   const skills = {
     'Data Engineering': ['Apache Spark', 'Kafka', 'Airflow', 'Hadoop', 'Snowflake'],
     'Programming': ['Python', 'SQL', 'Scala', 'Java', 'JavaScript'],
-    // 'Cloud Platforms': ['AWS', 'Google Cloud', 'Azure', 'Databricks'],
     'Databases': ['PostgreSQL', 'MongoDB', 'Redis', 'Cassandra', 'BigQuery'],
-    // 'Tools & DevOps': ['Docker', 'Kubernetes', 'Terraform', 'Git', 'Jenkins']
   };
 
   const competitions = [
@@ -81,20 +79,23 @@ const Resume = () => {
 
   return (
     <motion.div
-      className="py-12 space-y-12"
+      className="py-12 space-y-12 bg-gray-900 text-pink-100"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-    <motion.section variants={itemVariants} className="text-center space-y-4">
-      {/* Avatar */}
-      <motion.div className="flex justify-center">
-        <img
-          src="/images/avt.jpg"
-          alt="Profile"
-          className="rounded-full w-48 h-48 object-cover border-4 border-white shadow-md rotate-6"
-        />
-      </motion.div>
+      <motion.section variants={itemVariants} className="text-center space-y-4">
+        {/* Avatar */}
+        <motion.div className="flex justify-center">
+          <motion.img
+            src="/images/avt.jpg"
+            alt="Profile"
+            className="rounded-full w-48 h-48 object-cover border-4 border-pink-300 shadow-lg hover:scale-105 hover:rotate-3 transition duration-300 ease-in-out rotate-[10deg]"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+          />
+        </motion.div>
 
       {/* Title */}
       <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -116,13 +117,7 @@ const Resume = () => {
           <ExternalLink className="mr-2 w-4 h-4" />
           View PDF
         </a>
-        <a
-          href="https://drive.google.com/uc?export=download&id=your-resume-file-id"
-          className="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-medium transition-colors duration-200 text-sm"
-        >
-          <Download className="mr-2 w-4 h-4" />
-          Download PDF
-        </a>
+
       </div>
     </motion.section>
 

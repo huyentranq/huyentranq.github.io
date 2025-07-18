@@ -11,8 +11,9 @@ const Navbar = () => {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/projects', label: 'Projects' },
-    { path: '/doc-tech', label: 'Doc-Tech' },
     { path: '/resume', label: 'Resume' },
+    { path: '/doc-tech', label: 'Doc-Tech' }
+
   ];
 
   const socialLinks = [
@@ -71,15 +72,7 @@ const Navbar = () => {
               </Link>
             ))}
             
-            {/* Theme Toggle */}
-            <motion.button
-              onClick={toggleTheme}
-              className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </motion.button>
+
           </div>
         </div>
       </div>

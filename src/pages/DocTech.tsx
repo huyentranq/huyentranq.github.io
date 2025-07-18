@@ -93,7 +93,7 @@ const DocTech: React.FC = () => {
     <div className="p-6 space-y-6">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
         <h2 className="text-2xl font-bold text-blue-600">Doc-Tech</h2>
-        <p className="text-gray-400 text-sm">Trang tài liệu cá nhân của bạn</p>
+        <p className="text-gray-400 text-sm"> Tech document sưu tầm  </p>
       </motion.div>
 
       {/* Nút category luôn hiển thị */}

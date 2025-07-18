@@ -45,7 +45,19 @@ const ProjectDetail = () => {
               return;
             }
             break;
-
+          
+          case 'streaming-data-pipeline':
+            try {
+              const response = await fetch(`${import.meta.env.BASE_URL}projects/Streaming/readme.md`)
+              if (!response.ok) throw new Error('Failed to load markdown');
+              projectContent = await response.text();
+            } catch (err) {
+              setError(true);
+              setLoading(false);
+              return;
+            }
+            break;
+            
           default:
             setError(true);
             setLoading(false);
