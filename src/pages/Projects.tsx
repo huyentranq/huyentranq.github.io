@@ -61,7 +61,7 @@ const Projects = () => {
           ✨ My Projects
         </h1>
         <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          A collection of projects I’ve built with 💖, showcasing data engineering, analytical insights and a bit of creative front-end.
+          A collection of projects I’ve built with, showcasing data engineering, analytical insights and a bit of creative front-end.
         </p>
       </motion.div>
 
