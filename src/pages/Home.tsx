@@ -23,11 +23,11 @@ const Home = () => {
   const skillsSection = [
     {
       title: 'Data Engineering',
-      items: ['ETL/ELT Pipelines', 'Streaming & Batch Processing', 'Apache Spark', 'Apache Kafka', 'Airflow / Dagster'],
+      items: ['ETL/ELT Pipelines', 'Streaming & Batch Processing', 'Apache Spark', 'Apache Kafka', 'Airflow'],
     },
     {
       title: 'Programming & Querying',
-      items: ['Python', 'SQL', 'Bash', 'PySpark', 'R (basic analytics)'],
+      items: ['Python', 'SQL', 'C++', 'R (basic analytics)'],
     },
     {
       title: 'Cloud & DevOps',
@@ -35,7 +35,7 @@ const Home = () => {
     },
     {
       title: 'Other skills',
-      items: ['Power BI', 'Machine Learning/Modeling', 'LLM Prompt Engineering','Fine-tuning'],
+      items: ['Power BI', 'Machine Learning/Modeling', 'LLM Prompt Engineering & Data Processing','Fine-tuning'],
     },
   ];
 
