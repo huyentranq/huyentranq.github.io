@@ -304,11 +304,9 @@ The **Gold Layer** contains aggregated and transformed data structured into dime
 
 
 ## Conclusion
-   Through this streaming pipeline project, I had the opportunity to explore advanced technologies such as Kafka, Spark         Streaming,Airflow, Power BI.
 
-   Each of them is incredibly powerful — and quite challenging to get hands-on immediately.
+   After three weeks of effort, I finally completed the project and learned a great deal. Each of technologies is incredibly powerful — and quite challenging to get hands-on immediately.
 
-   After three weeks of effort, I finally completed the project and learned a great deal.
 
    This is my third Data Engineering project on my journey to becoming a Data Engineer, and I truly hope it will be useful to you as  well.
 
