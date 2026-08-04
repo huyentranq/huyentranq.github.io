@@ -1,29 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink } from 'lucide-react';
+import { ArrowRight, Github } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
     {
-      title: 'Movie Recommendation System',
+      title: 'TMDB Movie Recommendation Pipeline',
+      type: 'Data Engineering / Lakehouse',
       description:
-        'An Data pipeline serving for Movie recommendation system based on user behavior',
-      image:
-        'https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tech: ['Python', 'PySpark', 'ELT', 'DBT', 'Dagster'],
+        'An end-to-end lakehouse pipeline that ingests TMDB/Kaggle movie data, processes it with Spark, models analytics-ready tables with dbt, and serves recommendation outputs through downstream applications.',
+      image: 'https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=800',
+      highlights: ['1M+ records', 'Bronze/Silver/Gold', 'dbt warehouse models'],
+      tech: ['Python', 'PySpark', 'ELT', 'dbt', 'Dagster'],
       github: 'https://github.com/huyentranq/TMDB-Pipeline-Recommendation',
       slug: 'movie-recommendation-system',
     },
     {
-      title: 'Streaming Data pipeline',
+      title: 'Streaming Data Pipeline',
+      type: 'Streaming / Analytics',
       description:
-        'A Streaming pipeline showcase real-time data processing by sales pizza dataset',
-      image:
-        '/projects/Streaming/images/pages.png',
-      tech: ['Kafka', 'Spark', 'Python', 'PowerBI','Streaming'],
+        'A real-time pizza sales pipeline using Kafka, Spark Streaming, MinIO, PostgreSQL, Airflow, and Power BI to move raw events into analytics-ready medallion layers.',
+      image: '/projects/Streaming/images/pages.png',
+      highlights: ['Kafka events', 'Spark Streaming', 'Power BI reporting'],
+      tech: ['Kafka', 'Spark', 'Python', 'Power BI', 'Airflow'],
       github: 'https://github.com/huyentranq/Streaming-Data-pipeline',
       slug: 'streaming-data-pipeline',
+    },
+    {
+      title: 'Sketch-to-Image Face Synthesis',
+      type: 'Deep Learning / Conditional GAN',
+      description:
+        'A final deep learning project using Pix2Pix and transfer learning to translate face sketches into photo-like portraits, with paired-data preprocessing, ablation studies, quantitative evaluation, and Gradio deployment.',
+      image: '/projects/SketchToImage/images/test_app.png',
+      highlights: ['FID 71.65', 'Identity Cosine 0.8455', '564 aligned samples'],
+      tech: ['PyTorch', 'Pix2Pix', 'U-Net', 'PatchGAN', 'OpenCV', 'Gradio'],
+      github: 'https://github.com/huyentranq/Sketch-to-Image-by-Pix2Pix',
+      slug: 'sketch-to-image-pix2pix',
     },
   ];
 
@@ -31,121 +44,109 @@ const Projects = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.12 },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: 24, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.5,
-      },
+      transition: { duration: 0.45 },
     },
   };
 
   return (
     <motion.div
-      className="py-12 px-4 space-y-8 bg-gradient-to-br from-pink-50 via-fuchsia-100 to-white dark:from-gray-900 dark:to-gray-800"
+      className="min-h-screen bg-[#0b0f12] px-5 py-10 text-white sm:px-8 lg:px-12"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      {/* Heading */}
-      <motion.div variants={itemVariants} className="text-center space-y-3">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-400 via-fuchsia-500 to-purple-500 bg-clip-text text-transparent">
-          ✨ My Projects
-        </h1>
-        <p className="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          A collection of projects I’ve built with, showcasing data engineering, analytical insights and a bit of creative front-end.
-        </p>
-      </motion.div>
+      <div className="mx-auto max-w-6xl space-y-10">
+        <motion.div variants={itemVariants} className="max-w-3xl space-y-3">
+          <p className="text-[10px] text-[#83727b]">
+            <span className="text-[#ff4fa3]">huyen@portfolio</span> : ~/projects $ ls --selected
+          </p>
+          <h1 className="pt-4 text-3xl font-bold text-white">
+            <span className="mr-3 text-[#ff4fa3]">#</span>Selected Projects
+          </h1>
+          <p className="max-w-2xl text-[12px] leading-6 text-[#9b8e95]">
+            // Data engineering, machine learning, and streaming systems built with an emphasis on architecture, reproducibility, and measurable outcomes.
+          </p>
+        </motion.div>
 
-      {/* Project Cards */}
-      <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.slug}
-            className="bg-white/70 dark:bg-[#1e1b4b] rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -3 }}
-          >
-            <div className="h-48 relative overflow-hidden">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 filter brightness-95 contrast-105"
+        <motion.div variants={itemVariants} className="grid gap-5 lg:grid-cols-3">
+          {projects.map((project) => (
+            <article
+              key={project.slug}
+              className="group relative flex h-full flex-col overflow-hidden border border-[#3d2933] bg-[#0e1114] transition hover:-translate-y-0.5 hover:border-[#ff4fa3]/70 hover:shadow-[8px_8px_0_#2a1020]"
+            >
+              <Link
+                to={`/projects/${project.slug}`}
+                className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#ff4fa3]"
+                aria-label={`Read case study: ${project.title}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-              <div className="absolute bottom-3 right-3 flex space-x-2">
-                {project.github && (
+              <div className="relative h-40 overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="h-full w-full object-cover grayscale-[35%] transition duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-[#ff4fa3]/5 mix-blend-color" />
+              </div>
+
+              <div className="flex flex-1 flex-col p-5">
+                <p className="text-[10px] font-bold uppercase text-[#ff67b0]">
+                  {project.type}
+                </p>
+                <h2 className="mt-2 text-lg font-bold text-white transition group-hover:text-[#ff7fbd]">
+                  {project.title}
+                </h2>
+                <p className="mt-3 text-[12px] leading-6 text-[#aa9da4]">
+                  {project.description}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.highlights.map((highlight) => (
+                    <span key={highlight} className="text-[10px] font-bold text-[#c86a98]">
+                      {highlight}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="border border-[#3f2c35] px-2 py-1 text-[10px] text-[#93848b]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-auto flex items-center justify-between gap-4 pt-5">
+                  <span className="inline-flex items-center text-[11px] font-bold text-[#ff67b0] transition group-hover:text-[#ffa3d0]">
+                    Read case study
+                    <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-1" />
+                  </span>
                   <a
                     href={project.github}
-                    className="p-2 bg-pink-600/90 rounded-full text-white hover:bg-pink-500 transition-colors"
+                    className="relative z-20 border border-[#3f2c35] p-2 text-[#8e7e86] transition hover:border-[#ff4fa3] hover:text-[#ff7fbd]"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`${project.title} GitHub repository`}
                   >
                     <Github size={16} />
                   </a>
-                )}
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    className="p-2 bg-purple-500/90 rounded-full text-white hover:bg-purple-400 transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink size={16} />
-                  </a>
-                )}
+                </div>
               </div>
-            </div>
-
-            <div className="p-5 flex flex-col justify-between">
-              <Link to={`/projects/${project.slug}`}>
-                <h3 className="text-xl font-semibold mb-2 text-purple-700 dark:text-pink-300 group-hover:text-pink-500 transition-colors">
-                  {project.title}
-                </h3>
-              </Link>
-
-              <p className="text-gray-700 dark:text-gray-300 mb-3 text-sm leading-relaxed">
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mb-3">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2 py-1 bg-pink-100 dark:bg-pink-700 text-pink-800 dark:text-white rounded-full text-xs"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <Link
-                to={`/projects/${project.slug}`}
-                className="inline-flex items-center text-pink-600 dark:text-pink-300 font-medium hover:text-pink-800 dark:hover:text-pink-200 transition-colors text-sm"
-              >
-                Read More
-                <motion.div
-                  className="ml-2"
-                  animate={{ x: [0, 3, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  →
-                </motion.div>
-              </Link>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+            </article>
+          ))}
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

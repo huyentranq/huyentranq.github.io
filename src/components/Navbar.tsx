@@ -1,17 +1,16 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Github, Linkedin, Mail, Sun, Moon } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const location = useLocation();
-  const { isDark, toggleTheme } = useTheme();
+  // const { isDark, toggleTheme } = useTheme();
 
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/projects', label: 'Projects' },
-    { path: '/resume', label: 'Resume' },
+    { path: '/blog', label: 'Blog' },
     { path: '/doc-tech', label: 'Doc-Tech' }
 
   ];
@@ -19,7 +18,7 @@ const Navbar = () => {
   const socialLinks = [
     { href: 'https://github.com/huyentranq', icon: Github, label: 'GitHub' },
     { href: 'https://www.linkedin.com/in/trang-nguyen-huyen-674109249/', icon: Linkedin, label: 'LinkedIn' },
-    { href: 'nguyenhuyentrangg457@gmail.com', icon: Mail, label: 'Email' },
+    { href: 'mailto:nguyenhuyentrangg457@gmail.com', icon: Mail, label: 'Email' },
   ];
 
   return (

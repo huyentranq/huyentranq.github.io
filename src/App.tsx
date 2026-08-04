@@ -1,36 +1,32 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './contexts/ThemeContext';
-import Navbar from './components/Navbar';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import DocTech from './pages/DocTech';
 import Resume from './pages/Resume';
+import Blog from './pages/Blog';
 import ScrollToTop from './components/ScrollToTop'; // ✅ đã import
 import SnippetDetail from './pages/SnippetDetail';
+import PortfolioShell from './components/PortfolioShell';
 
 function App() {
   return (
-    <ThemeProvider>
-      <Router>
-        <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
-          <Navbar />
-          <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-            <ScrollToTop /> {/* ✅ THÊM VÀO ĐÂY */}
+    <Router>
+      <PortfolioShell>
+        <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:slug" element={<ProjectDetail />} />
               <Route path="/doc-tech" element={<DocTech />} />
+              <Route path="/blog" element={<Blog />} />
               <Route path="/resume" element={<Resume />} />
               <Route path="/snippet/:id" element={<SnippetDetail />} />
 
             </Routes>
-          </main>
-        </div>
-      </Router>
-    </ThemeProvider>
+      </PortfolioShell>
+    </Router>
   );
 }
 

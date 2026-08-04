@@ -34,6 +34,18 @@ const ProjectDetail = () => {
         let projectContent = '';
 
         switch (slug) {
+          case 'sketch-to-image-pix2pix':
+            try {
+              const response = await fetch(`${import.meta.env.BASE_URL}projects/SketchToImage/readme.md`);
+              if (!response.ok) throw new Error('Failed to load markdown');
+              projectContent = await response.text();
+            } catch (err) {
+              setError(true);
+              setLoading(false);
+              return;
+            }
+            break;
+
           case 'movie-recommendation-system':
             try {
               const response = await fetch(`${import.meta.env.BASE_URL}projects/TMDB/prj1.md`);
@@ -104,12 +116,12 @@ const ProjectDetail = () => {
 
   return (
     <motion.div
-      className="py-16"
+      className="min-h-screen bg-[#0b0f12] px-5 py-10 text-[#d9d2d6] sm:px-8 lg:px-12"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex flex-col lg:flex-row gap-12">
+      <div className="mx-auto flex max-w-6xl flex-col gap-12 lg:flex-row">
         <div className="lg:w-3/4">
           <motion.div
             initial={{ x: -20, opacity: 0 }}
@@ -118,7 +130,7 @@ const ProjectDetail = () => {
           >
             <Link
               to="/projects"
-              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors mb-8 text-xl"
+              className="mb-8 inline-flex items-center text-[11px] font-bold text-[#ff67b0] transition-colors hover:text-[#ffa3d0]"
             >
               <ArrowLeft className="mr-2 w-4 h-4" />
               Back to Projects
@@ -144,7 +156,7 @@ const ProjectDetail = () => {
           )}
 
           <motion.article
-            className="text-base leading-loose text-gray-800 dark:text-gray-200"
+            className="project-terminal-prose text-[13px] leading-7 text-[#b8adb3]"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -155,7 +167,7 @@ const ProjectDetail = () => {
               components={{
                 h1: ({ children, ...props }) => (
                   <h1
-                    className="text-4xl font-extrabold mt-12 mb-6 leading-tight border-b border-neutral-500 pb-2 text-blue-500"
+                    className="mt-12 mb-6 border-b border-[#492c3a] pb-3 text-3xl font-bold leading-tight text-[#ff4fa3]"
                     id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
                     {...props}
                   >
@@ -164,7 +176,7 @@ const ProjectDetail = () => {
                 ),
                 h2: ({ children, ...props }) => (
                   <h2
-                    className="text-3xl font-bold mt-10 mb-5 leading-snug border-b border-neutral-400 pb-1 text-blue-400"
+                    className="mt-10 mb-5 border-b border-[#3d2933] pb-2 text-2xl font-bold leading-snug text-[#ff67b0]"
                     id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
                     {...props}
                   >
@@ -173,7 +185,7 @@ const ProjectDetail = () => {
                 ),
                 h3: ({ children, ...props }) => (
                   <h3
-                    className="text-xl font-bold mt-10 mb-5 leading-snug text-blue-300"
+                    className="mt-10 mb-5 text-lg font-bold leading-snug text-[#ff8fc5]"
                     id={String(children).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
                     {...props}
                   >

@@ -1,261 +1,442 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
+import {
+  ArrowRight,
+  Award,
+  BookOpen,
+  Briefcase,
+  CheckCircle2,
+  Database,
+  Github,
+  GraduationCap,
+  Linkedin,
+  Mail,
+  MapPin,
+  Medal,
+  Trophy,
+} from 'lucide-react';
+
+const reveal = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const listReveal = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.09 },
+  },
+};
+
+const Section = ({
+  id,
+  eyebrow,
+  title,
+  children,
+}: {
+  id: string;
+  eyebrow: string;
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <motion.section
+    id={id}
+    variants={reveal}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, amount: 0.28 }}
+    className="grid gap-6 border-t border-slate-200 py-12 dark:border-white/10 md:grid-cols-[190px_1fr]"
+  >
+    <div>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-teal-700 dark:text-teal-300">
+        {eyebrow}
+      </p>
+    </div>
+    <div className="max-w-3xl">
+      <h2 className="text-2xl font-black leading-tight text-slate-950 dark:text-white sm:text-3xl">
+        {title}
+      </h2>
+      <div className="mt-6">{children}</div>
+    </div>
+  </motion.section>
+);
 
 const Home = () => {
-  const contactLinks = [
-    { name: 'GitHub', url: 'https://github.com/huyentranq', icon: 'github' },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/trang-nguyen-huyen-674109249/', icon: 'linkedin' },
-    { name: 'Gmail', url: 'mailto:nguyenhuyentrangg457@gmail.com', icon: 'mail' },
-  ];
+  const location = useLocation();
 
-  const education = [
-    {
-      school: 'University of Science, VNU-HCM',
-      degree: 'B.Sc. in Data Science - GPA: 8.9/10',
-      period: '2023 – Present',
-    }
-  ];
+  useEffect(() => {
+    const section = new URLSearchParams(location.search).get('section');
+    if (!section) return;
+    window.setTimeout(() => document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 40);
+  }, [location.search]);
 
-
-
-  const skillsSection = [
-    {
-      title: 'Data Engineering',
-      items: ['ETL/ELT Pipelines', 'Streaming & Batch Processing', 'Apache Spark', 'Apache Kafka', 'Airflow'],
-    },
-    {
-      title: 'Programming & Querying',
-      items: ['Python', 'SQL', 'C++', 'R (basic analytics)'],
-    },
-    {
-      title: 'Cloud & DevOps',
-      items: ['Docker', 'Linux', 'CI (GitHub Actions)'],
-    },
-    {
-      title: 'Other skills',
-      items: ['Power BI', 'Machine Learning/Modeling', 'LLM Prompt Engineering & Data Processing','Fine-tuning'],
-    },
-  ];
-
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.2, duration: 0.6 },
-    }),
+  const profile = {
+    name: 'Nguyen Thi Huyen Trang',
+    role: 'Aspiring Data Engineer / Data Scientist',
+    location: 'Ho Chi Minh City, Vietnam',
+    email: 'nguyenhuyentrangg457@gmail.com',
+    phone: '+84 457 4767',
+    github: 'https://github.com/huyentranq',
+    linkedin: 'https://www.linkedin.com/in/trang-nguyen-huyen-674109249/',
   };
 
+  const achievements = [
+    {
+      title: 'MCM/ICM 2025',
+      result: 'Honorable Mention',
+      detail: 'Built Olympic medal prediction models using ensemble learning and uncertainty estimation.',
+      icon: Medal,
+    },
+    {
+      title: 'SCUDEM IX',
+      result: '2nd Prize',
+      detail: 'Modeled information diffusion and voting behavior with differential equations.',
+      icon: Trophy,
+    },
+    {
+      title: 'Vallet Scholarship 2025',
+      result: 'Scholarship Recipient',
+      detail: 'Recognized for strong academic and research performance.',
+      icon: Award,
+    },
+    {
+      title: 'MDS Datathon Challenge',
+      result: 'Top 20 Semi-finalist',
+      detail: 'Advanced to the semi-final round in a business data analytics competition.',
+      icon: Award,
+    },
+  ];
+
+  const certificates = [
+    { title: 'Advanced SQL Certificate', issuer: 'HackerRank' },
+    { title: 'Fundamental Data Engineer', issuer: 'AIDE' },
+  ];
+
+  const skills = [
+    {
+      label: 'Data Engineering',
+      items: [
+        'Python',
+        'SQL',
+        'ETL/ELT',
+        'Batch & Streaming Pipelines',
+        'PySpark',
+        'Apache Kafka',
+        'Apache Airflow',
+        'Dagster',
+        'dbt',
+        'Delta Lake',
+        'MinIO / S3',
+        'PostgreSQL',
+        'Docker',
+        'Power BI',
+      ],
+    },
+    {
+      label: 'Data Science & Modeling',
+      items: [
+        'Feature Engineering',
+        'Regression Analysis',
+        'Random Forest',
+        'XGBoost',
+        'LightGBM',
+        'PCA',
+        'Bayesian Bootstrap',
+        'Cross-validation',
+        'Model Evaluation',
+        'Uncertainty Analysis',
+      ],
+    },
+    {
+      label: 'Deep Learning & Computer Vision',
+      items: [
+        'PyTorch',
+        'Pix2Pix / cGAN',
+        'U-Net',
+        'PatchGAN',
+        'Transfer Learning',
+        'OpenCV',
+        'Image Augmentation',
+        'FID / LPIPS',
+        'Identity Similarity',
+        'Gradio',
+      ],
+    },
+  ];
+
+  const intelWorkstreams = [
+    {
+      label: 'Data Engineering',
+      title: 'Manufacturing ETL and downstream reporting automation',
+      detail:
+        'Built Python and SQLPathfinder ETL pipelines to extract heterogeneous chip-test logs, transform them into analysis-ready datasets, and load outputs into downstream reporting applications for repeatable first-cut engineering review.',
+    },
+    {
+      label: 'Decision Support',
+      title: 'On-hold product lot recommendation workflow',
+      detail:
+        'Co-developed a scheduled ETL-to-alert workflow that monitors live product-lot queues, cleans missing production fields, applies rule-based evaluation logic, and delivers release/review recommendations to engineering channels.',
+    },
+    {
+      label: 'Data Science Validation',
+      title: 'Alarm accuracy benchmarking for BLPCS',
+      detail:
+        'Compared trigger signals with actual chip failure outcomes, then produced confusion-matrix based accuracy baselines to quantify true alarms, false alarms, and threshold behavior.',
+    },
+    {
+      label: 'Statistical Optimization',
+      title: 'Spatial defect diagnostics and TACKOD noise reduction',
+      detail:
+        'Analyzed pocket/tray-level process patterns and pruned redundant correlated KPP combinations using regression and correlation checks to reduce noisy triggers and support root-cause isolation.',
+    },
+  ];
+
+  const projects = [
+    {
+      title: 'Sketch-to-Image Face Synthesis',
+      meta: 'Conditional GAN / Pix2Pix',
+      summary:
+        'Translated face sketches into photo-like portraits with Pix2Pix, U-Net generators, PatchGAN, transfer learning, ablation study, and Gradio deployment.',
+      proof: ['FID 71.65', 'Identity cosine 0.8455', 'LPIPS down 15.2%'],
+      href: '/projects/sketch-to-image-pix2pix',
+      github: 'https://github.com/huyentranq/Sketch-to-Image-by-Pix2Pix',
+    },
+    {
+      title: 'TMDB Movie Pipeline',
+      meta: 'Lakehouse / Recommendation',
+      summary:
+        'Built an end-to-end movie data platform with ingestion, Spark processing, dbt models, PostgreSQL warehouse, and recommendation-serving outputs.',
+      proof: ['1M+ records', 'Bronze/Silver/Gold', 'Star schema'],
+      href: '/projects/movie-recommendation-system',
+      github: 'https://github.com/huyentranq/TMDB-Pipeline-Recommendation',
+    },
+    {
+      title: 'Streaming Data Pipeline',
+      meta: 'Kafka / Spark Streaming',
+      summary:
+        'Designed a real-time sales data pipeline that moves events through Kafka, processes them with Spark, and prepares dashboard-ready analytical outputs.',
+      proof: ['Streaming ingestion', 'Spark jobs', 'Power BI output'],
+      href: '/projects/streaming-data-pipeline',
+      github: 'https://github.com/huyentranq/Streaming-Data-pipeline',
+    },
+  ];
+
   return (
-    <motion.div initial="hidden" animate="visible" className="py-12 space-y-16">
-      {/* 🌸 About Me + Education + Competitions */}
-      <motion.section custom={1} variants={fadeIn} className="flex flex-col md:flex-row items-start justify-center gap-10">
-        {/* Avatar */}
-        <div className="relative group w-60 h-60 mx-auto md:mx-0">
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
-          <img
-            src="/images/avt2.jpg"
-            alt="Avatar"
-            className="relative rounded-full w-60 h-60 object-cover border-4 border-white shadow-xl rotate-[10deg]"
-          />
-        </div>
-
-        {/* Right Column: About + Education + Competitions */}
-        <div className="text-left space-y-6 max-w-2xl">
-          {/* About Me */}
-          <div>
-            <h2 className="text-2xl font-bold text-pink-400 mb-2">About Me</h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Hello! I'm <span className="font-semibold text-purple-500">Huyen Trang</span>, a Data Science student
-              passionate about <span className="text-blue-500">Big Data</span>,{' '}
-              <span className="text-blue-500">Large Language Model - LLM</span>, and building modern data platforms.
+    <div className="bg-[#0b0f12] px-5 text-white sm:px-8 lg:px-12">
+      <main className="mx-auto max-w-5xl">
+        <motion.section
+          id="about"
+          variants={listReveal}
+          initial="hidden"
+          animate="visible"
+          className="grid min-h-[72vh] gap-8 py-14 md:grid-cols-[1fr_180px] md:items-center"
+        >
+          <motion.div variants={reveal} className="max-w-3xl">
+            <p className="text-[10px] font-normal text-[#84737c]">
+              <span className="text-[#ff4fa3]">huyen@portfolio</span> : ~ $ whoami
             </p>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              I'm currently diving deeper into data engineering and real-time data processing using open-source tools.
+            <h1 className="portfolio-title mt-5 text-4xl font-black leading-tight text-white sm:text-5xl">
+              {profile.name}
+            </h1>
+            <p className="mt-3 text-sm font-semibold text-slate-500 dark:text-slate-400">
+              {profile.role}
             </p>
-          </div>
+            <p className="mt-6 max-w-2xl text-[15px] leading-7 text-slate-700 dark:text-slate-300">
+              I am passionate about turning complex, messy data into reliable systems and meaningful insights. I am pursuing a career in Data Engineering and Data Science, with a particular interest in building scalable pipelines, exploring patterns through rigorous analysis, and developing models that support real-world decisions. I enjoy understanding how data moves, what it reveals, and how thoughtful engineering can make it more trustworthy and useful.
+            </p>
 
-          {/* Education Section */}
-          <motion.div variants={fadeIn} custom={2}>
-            <h3 className="text-lg font-semibold text-purple-400 mb-2">Education 🎓</h3>
-            <div className="space-y-3">
-              {education.map((edu, i) => (
-                <div key={i} className="border-l-2 border-purple-400 pl-3">
-                  <p className="font-semibold text-white">{edu.school}</p>
-                  <p className="text-sm text-gray-300">{edu.degree}</p>
-                  <p className="text-xs text-gray-400 mb-1">{edu.period}</p>
-                  <p className="text-xs text-gray-400">{edu.details}</p>
-                </div>
-              ))}
+            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-slate-600 dark:text-slate-300">
+              <span className="inline-flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-teal-700 dark:text-teal-300" />
+                {profile.location}
+              </span>
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-teal-700 dark:hover:text-teal-300">
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-teal-700 dark:hover:text-teal-300">
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
+              <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 hover:text-teal-700 dark:hover:text-teal-300">
+                <Mail className="h-4 w-4" />
+                Email
+              </a>
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link to="/projects" className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
+                View projects
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-md border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:border-slate-500 dark:border-white/15 dark:text-white dark:hover:border-white/35">
+                Contact
+              </a>
             </div>
           </motion.div>
 
-          {/* Competitions Section */}
+          <motion.div variants={reveal} className="md:justify-self-end">
+            <img
+              src="/images/avt2.jpg"
+              alt={profile.name}
+              className="h-32 w-32 object-cover grayscale-[20%] ring-1 ring-[#5b3045] md:h-40 md:w-40"
+            />
+          </motion.div>
+        </motion.section>
 
-        </div>
-      </motion.section>
-
-      {/* ✅ Technical Skills */}
-      <motion.section variants={fadeIn} custom={4} className="space-y-6">
-        <h2 className="text-xl font-bold text-center">Technical Skills</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
-          {skillsSection.map((section, index) => (
-            <motion.div
-              key={section.title}
-              className="bg-[#1e1b4b] text-white rounded-xl p-6 shadow-md"
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <h3 className="text-lg font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 drop-shadow-sm">
-                {section.title}
-              </h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
-                {section.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm leading-snug break-words">
-                    <span className="text-pink-400 mt-0.5">🌸</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+        <Section id="education" eyebrow="Education" title="Academic foundation and credentials">
+          <motion.div variants={listReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-6">
+            <motion.div variants={reveal} className="flex gap-4">
+              <GraduationCap className="mt-1 h-5 w-5 shrink-0 text-teal-700 dark:text-teal-300" />
+              <div>
+                <h3 className="text-base font-bold text-slate-950 dark:text-white">VNU-HCM University of Science</h3>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Bachelor of Data Science</p>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  Coursework includes Deep Learning, Machine Learning, Data Mining, Database Management, Fundamental Data Engineering, and Big Data.
+                </p>
+              </div>
             </motion.div>
-          ))}
-        </div>
-      </motion.section>
-{/* ✅ Featured Projects Section */}
-<motion.section custom={5} variants={fadeIn} className="space-y-8">
-  <div className="text-center">
-    <h2 className="text-2xl font-bold mb-1 text-white">✨ My Projects</h2>
-    <p className="text-blue-200 text-base">
-      Explore my feature projects
-    </p>
-  </div>
 
-  {/* Projects Cards */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {[
-      {
-        title: 'Movie Recommendation System',
-        description:
-          'A data pipeline serving a movie recommendation system based on user behavior.',
-        image:
-          'https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=800',
-        tech: ['Python', 'PySpark', 'ELT', 'DBT', 'Dagster'],
-        github: 'https://github.com/huyentranq/TMDB-Pipeline-Recommendation',
-        slug: 'movie-recommendation-system',
-      },
-      {
-        title: 'Streaming Data Pipeline',
-        description:
-          'A real-time streaming pipeline showcasing data processing on pizza sales dataset.',
-        image: '/projects/Streaming/images/pages.png',
-        tech: ['Kafka', 'Spark', 'Python', 'PowerBI', 'Streaming'],
-        github: 'https://github.com/huyentranq/Streaming-Data-pipeline',
-        slug: 'streaming-data-pipeline',
-      },
-    ].map((project, index) => (
-      <motion.div
-        key={project.slug}
-        className="bg-[#1e1b4b] rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        whileHover={{ y: -3 }}
-      >
-        <div className="h-48 relative overflow-hidden">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 filter brightness-95 contrast-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-          <div className="absolute bottom-3 right-3 flex space-x-2">
-            {project.github && (
-              <a
-                href={project.github}
-                className="p-2 bg-pink-600/90 rounded-full text-white hover:bg-pink-500 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github size={16} />
-              </a>
-            )}
-          </div>
-        </div>
+            <motion.div variants={reveal} className="grid gap-3 sm:grid-cols-2">
+              {certificates.map((cert) => (
+                <div key={cert.title} className="flex gap-3">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-teal-700 dark:text-teal-300" />
+                  <p className="text-sm leading-6 text-slate-700 dark:text-slate-300">
+                    <span className="font-semibold text-slate-950 dark:text-white">{cert.title}</span>{' '}
+                    <span className="text-slate-500 dark:text-slate-400">({cert.issuer})</span>
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </Section>
 
-        <div className="p-5 flex flex-col justify-between">
-          <Link to={`/projects/${project.slug}`}>
-            <h3 className="text-lg font-semibold mb-2 text-pink-300 group-hover:text-pink-400 transition-colors">
-              {project.title}
-            </h3>
-          </Link>
-
-          <p className="text-gray-300 mb-3 text-sm leading-relaxed">
-            {project.description}
-          </p>
-
-          <div className="flex flex-wrap gap-2 mb-3">
-            {project.tech.map((tech) => (
-              <span
-                key={tech}
-                className="px-2 py-1 bg-pink-700/50 text-white rounded-full text-xs"
-              >
-                {tech}
-              </span>
+        <Section id="recognition" eyebrow="Recognition" title="Awards and competitions">
+          <motion.div variants={listReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-5">
+            {achievements.map(({ title, result, detail, icon: Icon }) => (
+              <motion.div key={title} variants={reveal} className="flex gap-4">
+                <Icon className="mt-1 h-4 w-4 shrink-0 text-rose-600 dark:text-rose-300" />
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">{result}</p>
+                  <h3 className="mt-1 text-base font-bold text-slate-950 dark:text-white">{title}</h3>
+                  <p className="mt-1.5 text-sm leading-6 text-slate-600 dark:text-slate-300">{detail}</p>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
+        </Section>
 
-          <Link
-            to={`/projects/${project.slug}`}
-            className="inline-flex items-center text-pink-300 font-medium hover:text-pink-200 transition-colors text-sm"
-          >
-            Read More
-            <motion.div
-              className="ml-2"
-              animate={{ x: [0, 3, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              →
+        <Section id="skills" eyebrow="Skills" title="Practical stack">
+          <motion.div variants={listReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-6">
+            {skills.map((group) => (
+              <motion.div key={group.label} variants={reveal} className="grid gap-3 sm:grid-cols-[160px_1fr]">
+                <div className="flex items-center gap-2 text-sm font-bold text-slate-950 dark:text-white">
+                  <Database className="h-4 w-4 text-teal-700 dark:text-teal-300" />
+                  {group.label}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <span key={item} className="rounded-md border border-slate-200 px-2.5 py-1 text-xs text-slate-600 dark:border-white/10 dark:text-slate-300">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </Section>
+
+        <Section id="experience" eyebrow="Experience" title="Intel Products Vietnam">
+          <motion.div variants={listReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-6">
+            <motion.div variants={reveal}>
+              <div className="flex items-start gap-4">
+                <Briefcase className="mt-1 h-5 w-5 shrink-0 text-teal-700 dark:text-teal-300" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-950 dark:text-white">Data Engineering / Data Science Intern</p>
+                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Nov 2025 - Present</p>
+                  <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+                    Applied data engineering and data science methods to manufacturing operations: automated data collection, standardized production reporting, validated alarm behavior, and translated statistical findings into engineering actions.
+                  </p>
+                </div>
+              </div>
             </motion.div>
-          </Link>
-        </div>
-      </motion.div>
-    ))}
-  </div>
-</motion.section>
 
+            <div className="space-y-5 border-l border-slate-200 pl-5 dark:border-white/10">
+              {intelWorkstreams.map((item) => (
+                <motion.div key={item.title} variants={reveal} className="relative">
+                  <span className="absolute -left-[25px] top-1.5 h-2 w-2 rounded-full bg-teal-600 dark:bg-teal-300" />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-teal-700 dark:text-teal-300">{item.label}</p>
+                  <h3 className="mt-1 text-base font-bold text-slate-950 dark:text-white">{item.title}</h3>
+                  <p className="mt-1.5 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.detail}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </Section>
 
-      {/* ✅ Contact */}
-      <motion.section custom={6} variants={fadeIn} className="text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-8 space-y-4">
-        <h2 className="text-xl font-bold">Let's Connect</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
-          I'm open to new opportunities, collaborations, or tech discussions.
-        </p>
+        <Section id="projects" eyebrow="Projects" title="Selected work">
+          <motion.div variants={listReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-7">
+            {projects.map((project) => (
+              <motion.article key={project.title} variants={reveal} className="border-l border-slate-200 pl-5 dark:border-white/10">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">{project.meta}</p>
+                <h3 className="mt-1.5 text-lg font-black text-slate-950 dark:text-white">{project.title}</h3>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">{project.summary}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {project.proof.map((item) => (
+                    <span key={item} className="text-xs font-medium text-teal-700 dark:text-teal-300">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-3 flex flex-wrap gap-4 text-sm font-semibold">
+                  <Link to={project.href} className="inline-flex items-center gap-1.5 text-rose-700 hover:text-rose-900 dark:text-rose-300 dark:hover:text-rose-100">
+                    Detail
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+                    GitHub
+                  </a>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </Section>
 
-        <div className="flex justify-center space-x-6">
-          {contactLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-            >
-              {link.icon === 'github' && <Github className="w-6 h-6" />}
-              {link.icon === 'linkedin' && <Linkedin className="w-6 h-6" />}
-              {link.icon === 'mail' && <Mail className="w-6 h-6" />}
-            </a>
-          ))}
-        </div>
-
-        {/* ✅ Hiện tên email */}
-  <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
-    📧 nguyenhuyentrangg457@gmail.com
-  </p>
-      </motion.section>
-    </motion.div>
+        <motion.section
+          id="contact"
+          variants={reveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.35 }}
+          className="border-t border-slate-200 py-12 dark:border-white/10"
+        >
+          <div className="max-w-3xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-teal-700 dark:text-teal-300">Contact</p>
+            <h2 className="mt-3 text-2xl font-black text-slate-950 dark:text-white">
+              Open to full-time roles, collaborations, and technical conversations.
+            </h2>
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
+              {profile.email} · {profile.phone}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200">
+                <Mail className="h-4 w-4" />
+                Email
+              </a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:border-slate-500 dark:border-white/15 dark:text-white dark:hover:border-white/35">
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </motion.section>
+      </main>
+    </div>
   );
 };
 

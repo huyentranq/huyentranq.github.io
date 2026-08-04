@@ -8,6 +8,13 @@ interface ProjectMeta {
 }
 
 const projectsMeta: Record<string, ProjectMeta> = {
+  "sketch-to-image-pix2pix": {
+    title: "Sketch-to-Image Face Synthesis",
+    githubUrl: "https://github.com/huyentranq/Sketch-to-Image-by-Pix2Pix",
+    description:
+      "Conditional GAN / Pix2Pix project for translating face sketches into photo-realistic portraits, including preprocessing, ablation, evaluation, and Gradio deployment.",
+    tech: "PyTorch    Pix2Pix    U-Net    PatchGAN    OpenCV    Gradio",
+  },
   "movie-recommendation-system": {
     title: "Movie Recommendation System",
     githubUrl: "https://github.com/huyentranq/TMDB-Pipeline-Recommendation",

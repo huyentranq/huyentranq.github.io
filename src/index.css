@@ -94,3 +94,106 @@ a {
 button {
   @apply transition-all duration-200;
 }
+
+/* Doc-tech editor palette */
+.doc-tech-code .hljs-comment,
+.doc-tech-code .hljs-quote {
+  color: #765568;
+  font-style: italic;
+}
+
+.doc-tech-code .hljs-keyword,
+.doc-tech-code .hljs-selector-tag,
+.doc-tech-code .hljs-literal,
+.doc-tech-code .hljs-section {
+  color: #ff4fa3;
+  font-weight: 700;
+}
+
+.doc-tech-code .hljs-string,
+.doc-tech-code .hljs-title,
+.doc-tech-code .hljs-name,
+.doc-tech-code .hljs-attribute {
+  color: #8de8ff;
+}
+
+.doc-tech-code .hljs-number,
+.doc-tech-code .hljs-symbol,
+.doc-tech-code .hljs-bullet,
+.doc-tech-code .hljs-variable,
+.doc-tech-code .hljs-template-variable {
+  color: #ffc66d;
+}
+
+.doc-tech-code .hljs-built_in,
+.doc-tech-code .hljs-type,
+.doc-tech-code .hljs-class .hljs-title {
+  color: #d9a0ff;
+}
+
+.doc-tech-code .hljs-params,
+.doc-tech-code .hljs-meta,
+.doc-tech-code .hljs-operator,
+.doc-tech-code code {
+  color: #d9dedb;
+}
+
+/* Shared AI-workspace visual language */
+.portfolio-title {
+  text-shadow: 2px 0 0 #ff4fa3, -1px 0 0 #5ee7ff;
+}
+
+.portfolio-shell .text-teal-700,
+.portfolio-shell .text-teal-600,
+.portfolio-shell .text-rose-700,
+.dark .portfolio-shell .dark\:text-teal-300,
+.dark .portfolio-shell .dark\:text-rose-300 {
+  color: #ff67b0 !important;
+}
+
+.portfolio-shell .bg-teal-600,
+.dark .portfolio-shell .dark\:bg-teal-300 {
+  background-color: #ff4fa3 !important;
+}
+
+.portfolio-shell .rounded-md,
+.portfolio-shell .rounded-lg {
+  border-radius: 2px;
+}
+
+.portfolio-shell .rounded-2xl {
+  border-radius: 4px;
+}
+
+.dark .portfolio-shell .dark\:border-white\/10,
+.dark .portfolio-shell .dark\:border-white\/15 {
+  border-color: #3d2933 !important;
+}
+
+.dark .portfolio-shell .dark\:bg-slate-900,
+.dark .portfolio-shell .dark\:bg-gray-800 {
+  background-color: #0e1114 !important;
+}
+
+.project-terminal-prose pre {
+  border-left: 2px solid #ff4fa3;
+  border-radius: 0;
+  background: transparent;
+  color: #d9dedb;
+  padding-left: 1.25rem;
+}
+
+.project-terminal-prose :not(pre) > code {
+  border-radius: 0;
+  background: #25131e;
+  color: #ff8fc8;
+}
+
+.project-terminal-prose a {
+  color: #ff67b0;
+}
+
+.project-terminal-prose img {
+  border: 1px solid #432b37;
+  border-radius: 2px;
+}
