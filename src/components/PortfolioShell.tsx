@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   BookOpen,
   Briefcase,
+  ChevronDown,
+  ChevronRight,
   Database,
   FolderKanban,
   Github,
@@ -55,8 +57,7 @@ const portfolioNavigation: NavigationGroup[] = [
     label: 'Knowledge',
     icon: BookOpen,
     items: [
-      { label: 'Doc-Tech', to: '/doc-tech' },
-      { label: 'Technical Blog', to: '/blog' },
+      { label: 'Beyond Data', to: '/blog' },
     ],
   },
 ];
@@ -109,20 +110,36 @@ const docTechNavigation: NavigationGroup[] = [
 
 const PortfolioShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
+  const isDocTech = location.pathname === '/doc-tech';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const isDocTech = location.pathname === '/doc-tech';
-  const navigation = isDocTech ? docTechNavigation : portfolioNavigation;
+  const [isDocTechOpen, setIsDocTechOpen] = useState(isDocTech);
+  const [expandedDocGroup, setExpandedDocGroup] = useState<string | null>(null);
+  const navigation = portfolioNavigation;
+
+  useEffect(() => {
+    if (!isDocTech) return;
+    setIsDocTechOpen(true);
+    const activeGroup = docTechNavigation.find((group) =>
+      group.items.some((item) => item.to === `${location.pathname}${location.search}`),
+    );
+    if (activeGroup) setExpandedDocGroup(activeGroup.label);
+  }, [isDocTech, location.pathname, location.search]);
 
   const filteredNavigation = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return navigation;
     return navigation
-      .map((group) => ({
-        ...group,
-        items: group.items.filter((item) => `${group.label} ${item.label}`.toLowerCase().includes(normalized)),
-      }))
-      .filter((group) => group.items.length > 0);
+      .map((group) => {
+        const items = group.items.filter((item) => `${group.label} ${item.label}`.toLowerCase().includes(normalized));
+        const matchesDocTech =
+          group.label === 'Knowledge' &&
+          (`doc-tech ${docTechNavigation.flatMap((docGroup) => [docGroup.label, ...docGroup.items.map((item) => item.label)]).join(' ')}`
+            .toLowerCase()
+            .includes(normalized));
+        return { ...group, items, matchesDocTech };
+      })
+      .filter((group) => group.items.length > 0 || group.matchesDocTech);
   }, [navigation, query]);
 
   const isActive = (to: string) => {
@@ -184,6 +201,71 @@ const PortfolioShell: React.FC<{ children: React.ReactNode }> = ({ children }) =
                     </Link>
                   );
                 })}
+
+                {group.label === 'Knowledge' && (
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => setIsDocTechOpen((open) => !open)}
+                      className={`flex w-full items-center justify-between py-1.5 text-left text-[11px] leading-4 transition ${
+                        isDocTech ? 'text-[#ff67b0]' : 'text-[#8b7e85] hover:text-[#ded5da]'
+                      }`}
+                      aria-expanded={isDocTechOpen}
+                    >
+                      <span>
+                        <span className="mr-2 text-[#55404a]">{isDocTech ? '>' : '·'}</span>
+                        Doc-Tech
+                      </span>
+                      {isDocTechOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+                    </button>
+
+                    {isDocTechOpen && (
+                      <div className="ml-2 mt-1 space-y-1 border-l border-[#3a2631] pl-3">
+                        {docTechNavigation.map((docGroup) => {
+                          const DocIcon = docGroup.icon;
+                          const isExpanded = expandedDocGroup === docGroup.label;
+                          return (
+                            <div key={docGroup.label}>
+                              <button
+                                type="button"
+                                onClick={() => setExpandedDocGroup(isExpanded ? null : docGroup.label)}
+                                className="flex w-full items-center justify-between py-1.5 text-left text-[10px] text-[#a7979f] hover:text-[#ff7fbd]"
+                                aria-expanded={isExpanded}
+                              >
+                                <span className="flex items-center gap-2">
+                                  <DocIcon className="h-3 w-3 text-[#c45189]" />
+                                  {docGroup.label}
+                                </span>
+                                {isExpanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+                              </button>
+
+                              {isExpanded && (
+                                <div className="ml-1 border-l border-[#32242b] pl-3">
+                                  {docGroup.items.map((item) => {
+                                    const active = isActive(item.to);
+                                    return (
+                                      <Link
+                                        key={item.to}
+                                        to={item.to}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className={`block py-1.5 text-[10px] leading-4 transition ${
+                                          active ? 'text-[#ff67b0]' : 'text-[#74666d] hover:text-[#d5c8ce]'
+                                        }`}
+                                      >
+                                        <span className="mr-2 text-[#49333e]">{active ? '>' : '·'}</span>
+                                        {item.label}
+                                      </Link>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           );
