@@ -116,12 +116,14 @@ const BeyondData: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-10 grid gap-5 lg:grid-cols-2">
+            <div className="mt-10 grid gap-8">
               <figure>
                 <img
                   src="/images/beyond data/intel 1.jpg"
                   alt="Huyen Trang presenting technical work at Intel Products Vietnam"
-                  className="aspect-[4/3] w-full border border-[#432b37] object-cover"
+                  width={2267}
+                  height={1426}
+                  className="h-auto w-full border border-[#432b37] object-contain"
                 />
                 <figcaption className="mt-3 text-[10px] text-[#6f5a64]">Turning an idea into a conversation.</figcaption>
               </figure>
@@ -129,7 +131,9 @@ const BeyondData: React.FC = () => {
                 <img
                   src="/images/beyond data/intel 2.jpg"
                   alt="A group gathering at an Intel Products Vietnam event"
-                  className="aspect-[4/3] w-full border border-[#432b37] object-cover"
+                  width={2560}
+                  height={1706}
+                  className="h-auto w-full border border-[#432b37] object-contain"
                 />
                 <figcaption className="mt-3 text-[10px] text-[#6f5a64]">Growth is rarely an individual story.</figcaption>
               </figure>
