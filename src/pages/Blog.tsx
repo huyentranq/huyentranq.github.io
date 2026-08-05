@@ -117,7 +117,7 @@ const BeyondData: React.FC = () => {
             </div>
 
             <div className="mt-10 grid gap-8">
-              <figure>
+              <figure className="grid gap-5 md:grid-cols-[minmax(0,3fr)_minmax(180px,1fr)] md:items-center">
                 <img
                   src="/images/beyond data/intel 1.jpg"
                   alt="Huyen Trang presenting technical work at Intel Products Vietnam"
@@ -125,9 +125,11 @@ const BeyondData: React.FC = () => {
                   height={1426}
                   className="h-auto w-full border border-[#432b37] object-contain"
                 />
-                <figcaption className="mt-3 text-[10px] text-[#6f5a64]">Turning an idea into a conversation.</figcaption>
+                <figcaption className="border-l border-[#432b37] pl-4 text-[11px] leading-6 text-[#806c76]">
+                  Turning an idea into a conversation.
+                </figcaption>
               </figure>
-              <figure>
+              <figure className="grid gap-5 md:grid-cols-[minmax(0,3fr)_minmax(180px,1fr)] md:items-center">
                 <img
                   src="/images/beyond data/intel 2.jpg"
                   alt="A group gathering at an Intel Products Vietnam event"
@@ -135,7 +137,9 @@ const BeyondData: React.FC = () => {
                   height={1706}
                   className="h-auto w-full border border-[#432b37] object-contain"
                 />
-                <figcaption className="mt-3 text-[10px] text-[#6f5a64]">Growth is rarely an individual story.</figcaption>
+                <figcaption className="border-l border-[#432b37] pl-4 text-[11px] leading-6 text-[#806c76]">
+                  Growth is rarely an individual story.
+                </figcaption>
               </figure>
             </div>
           </div>
