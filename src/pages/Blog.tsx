@@ -75,16 +75,6 @@ const BeyondData: React.FC = () => {
               <figcaption className="mt-3 text-[10px] text-[#6f5a64]">A clear view after a long trail.</figcaption>
             </figure>
 
-            <figure className="mt-6 grid gap-6 lg:grid-cols-[1fr_260px] lg:items-end">
-              <img
-                src="/images/beyond data/leo nui 2.jpg"
-                alt="A hiking group walking through a green forest trail"
-                className="max-h-[760px] w-full border border-[#432b37] object-cover object-center"
-              />
-              <figcaption className="pb-2 text-[11px] leading-6 text-[#7f6b75]">
-                Some parts of the journey are shared: moving at different speeds, watching the path for one another, and arriving with more than a photograph.
-              </figcaption>
-            </figure>
           </div>
         </motion.article>
 

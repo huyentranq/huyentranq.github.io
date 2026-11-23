@@ -407,6 +407,18 @@ const Home = () => {
           </motion.div>
         </Section>
 
+        <Section id="beyond-data" eyebrow="Field notes" title="Beyond Data">
+          <div className="grid items-center gap-5 lg:grid-cols-[3fr_2fr]">
+            <img src="/images/beyond data/leo nui 1.jpg" alt="Huyen Trang beside the Vietnamese flag at a mountain viewpoint" loading="lazy" className="h-auto w-full" />
+            <div>
+              <p className="text-sm leading-6 text-[#b8adb3]">Away from my desk, I like to trade the screen for a forest trail.</p>
+              <Link to="/blog" className="mt-4 inline-flex items-center gap-2 text-sm text-[#ff67b0] hover:underline">
+                View field notes <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </Section>
+
         <motion.section
           id="contact"
           variants={reveal}

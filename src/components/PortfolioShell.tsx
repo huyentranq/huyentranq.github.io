@@ -56,9 +56,7 @@ const portfolioNavigation: NavigationGroup[] = [
   {
     label: 'Knowledge',
     icon: BookOpen,
-    items: [
-      { label: 'Beyond Data', to: '/blog' },
-    ],
+    items: [{ label: 'Beyond Data', to: '/blog' }],
   },
 ];
 
