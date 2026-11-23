@@ -412,11 +412,18 @@ const Home = () => {
             <img src="/images/beyond data/leo nui 1.jpg" alt="Huyen Trang beside the Vietnamese flag at a mountain viewpoint" loading="lazy" className="h-auto w-full" />
             <div>
               <p className="text-sm leading-6 text-[#b8adb3]">Away from my desk, I like to trade the screen for a forest trail.</p>
-              <Link to="/blog" className="mt-4 inline-flex items-center gap-2 text-sm text-[#ff67b0] hover:underline">
-                View field notes <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
             </div>
           </div>
+          <figure className="mt-8 grid items-center gap-5 lg:grid-cols-[3fr_2fr]">
+            <img src="/images/beyond data/intel 1.jpg" alt="Huyen Trang presenting to colleagues at Intel Products Vietnam" width={2267} height={1426} loading="lazy" className="h-auto w-full" />
+            <figcaption>
+              <h3 className="text-base font-bold text-white">Learning in public</h3>
+              <p className="mt-2 text-sm leading-6 text-[#b8adb3]">Presenting at Intel taught me how much a colleague's question can sharpen my own understanding.</p>
+            </figcaption>
+          </figure>
+          <Link to="/blog" className="mt-5 inline-flex items-center gap-2 text-sm text-[#ff67b0] hover:underline">
+            View field notes <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </Section>
 
         <motion.section
